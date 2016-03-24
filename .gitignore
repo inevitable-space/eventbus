@@ -1,6 +1,7 @@
 # build files #
 build/
 .idea/
+.gradle/
 out/
 
 # Package Files #

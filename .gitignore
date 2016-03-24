@@ -1,0 +1,9 @@
+# build files #
+build/
+.idea/
+out/
+
+# Package Files #
+*.jar
+*.war
+*.ear

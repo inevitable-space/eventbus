@@ -1,6 +1,8 @@
-package space.inevitable.eventbus.subcribe
+package space.inevitable.eventbus.collections
 
 import space.inevitable.eventbus.beans.ExecutionBundle
+import space.inevitable.eventbus.collections.ExecutionBundleSet
+import space.inevitable.eventbus.subcribe.ExecutionBundleStubsHolder
 import spock.lang.Specification
 
 class ExecutionBundleSetTest extends Specification {

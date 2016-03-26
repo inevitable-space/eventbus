@@ -1,4 +1,4 @@
-package space.inevitable.eventbus.subcribe;
+package space.inevitable.eventbus.collections;
 
 
 import java.util.Iterator;

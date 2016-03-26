@@ -5,7 +5,7 @@ import java.util.Map;
 
 import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.invoker.Invoker;
-import space.inevitable.eventbus.subcribe.ExecutionBundleSet;
+import space.inevitable.eventbus.collections.ExecutionBundleSet;
 
 
 public final class ListenersInPoolProxyInvoker {

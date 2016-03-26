@@ -9,7 +9,7 @@ class ExceptionWithSuggestionsBuilderTest extends Specification {
         exceptionWithSuggestionsBuilder = new ExceptionWithSuggestionsBuilder();
     }
 
-    def "build should return ExceptionWithSuggestions"() {
+    def "build should return an instance of ExceptionWithSuggestions"() {
         when:
         ExceptionWithSuggestions exceptionWithSuggestions = exceptionWithSuggestionsBuilder.build()
 
@@ -17,7 +17,7 @@ class ExceptionWithSuggestionsBuilderTest extends Specification {
         exceptionWithSuggestions
     }
 
-    def "build should return ExceptionWithSuggestions with message empty when message and suggestions are not provided"() {
+    def "build should return an instance of ExceptionWithSuggestions with message empty when message and suggestions are not provided"() {
         when:
         ExceptionWithSuggestions exceptionWithSuggestions = exceptionWithSuggestionsBuilder.build()
 
@@ -25,7 +25,7 @@ class ExceptionWithSuggestionsBuilderTest extends Specification {
         exceptionWithSuggestions.message
     }
 
-    def "build should return ExceptionWithSuggestions with message equals to TEST when no suggestions are provided and TEST is provided as message"() {
+    def "build should return an instance of ExceptionWithSuggestions with message equals to TEST when no suggestions are provided and TEST is provided as message"() {
         when:
         exceptionWithSuggestionsBuilder.setMessage("TEST")
         ExceptionWithSuggestions exceptionWithSuggestions = exceptionWithSuggestionsBuilder.build()
@@ -34,7 +34,7 @@ class ExceptionWithSuggestionsBuilderTest extends Specification {
         exceptionWithSuggestions.message == "TEST"
     }
 
-    def "build should return ExceptionWithSuggestions with message equals to TEST\nA when TEST is provided as message and A as only suggestion "() {
+    def "build should return an instance of ExceptionWithSuggestions with message equals to TEST\nA when TEST is provided as message and A as only suggestion "() {
         when:
         exceptionWithSuggestionsBuilder.setMessage("TEST")
         exceptionWithSuggestionsBuilder.addSuggestion("A")
@@ -44,12 +44,12 @@ class ExceptionWithSuggestionsBuilderTest extends Specification {
         exceptionWithSuggestions.message == "TEST\nA"
     }
 
-    def "hasSuggestions should return false is no suggestions were added"() {
+    def "hasSuggestions should return false when no suggestions were added"() {
         expect:
         !exceptionWithSuggestionsBuilder.hasSuggestions()
     }
 
-    def "hasSuggestions should return true is no suggestions were added"() {
+    def "hasSuggestions should return true when suggestions were added"() {
         when:
         exceptionWithSuggestionsBuilder.addSuggestion("A")
 

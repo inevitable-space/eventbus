@@ -27,18 +27,6 @@ public final class ListenerMethodValidator {
         throwExceptionIfNeeded();
     }
 
-    private void verifyMethodHasVoidReturnType() {
-        final Class< ? > returnType = method.getReturnType();
-        final boolean isReturnTypeVoid = returnType.equals( Void.TYPE );
-
-        if ( isReturnTypeVoid ) {
-            return;
-        }
-
-        final String suggestion = String.format( "Make the return type void. Current return type is %s.", returnType );
-        exceptionWithSuggestionsBuilder.addSuggestion( suggestion );
-    }
-
     private void throwExceptionIfNeeded() {
         if ( !exceptionWithSuggestionsBuilder.hasSuggestions() ) {
             return;
@@ -52,6 +40,18 @@ public final class ListenerMethodValidator {
 
         exceptionWithSuggestionsBuilder.setMessage(message);
         throw exceptionWithSuggestionsBuilder.build();
+    }
+
+    private void verifyMethodHasVoidReturnType() {
+        final Class< ? > returnType = method.getReturnType();
+        final boolean isReturnTypeVoid = returnType.equals( Void.TYPE );
+
+        if ( isReturnTypeVoid ) {
+            return;
+        }
+
+        final String suggestion = String.format( "Make the return type void. Current return type is %s.", returnType );
+        exceptionWithSuggestionsBuilder.addSuggestion( suggestion );
     }
 
     private void verifyIsNotPrivate() {

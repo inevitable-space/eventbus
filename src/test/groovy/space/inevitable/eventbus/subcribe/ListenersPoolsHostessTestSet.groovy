@@ -6,8 +6,7 @@ import space.inevitable.eventbus.ListenersStubsHolder.EventB
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerB
 import space.inevitable.eventbus.invoker.SameThreadInvoker
-import space.inevitable.eventbus.subcribe.ExecutionBundleSet
-import space.inevitable.eventbus.subcribe.ListenersHostess
+import space.inevitable.eventbus.collections.ExecutionBundleSet
 import spock.lang.Specification
 
 import java.lang.reflect.Type

@@ -2,7 +2,7 @@ package space.inevitable.eventbus.post
 
 import space.inevitable.eventbus.invoker.Invoker
 import space.inevitable.eventbus.invoker.SameThreadInvoker
-import space.inevitable.eventbus.subcribe.ExecutionBundleSet
+import space.inevitable.eventbus.collections.ExecutionBundleSet
 import space.inevitable.eventbus.subcribe.ListenersHostess
 import spock.lang.Specification
 import java.lang.reflect.Type

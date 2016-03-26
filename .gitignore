@@ -7,4 +7,5 @@ out/
 # Package Files #
 *.jar
 *.war
+/.config
 *.ear

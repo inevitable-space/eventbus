@@ -1,7 +1,8 @@
-package space.inevitable.eventbus.post
+package space.inevitable.eventbus.invoker
 
 import space.inevitable.eventbus.ListenersStubsHolder
 import space.inevitable.eventbus.invoker.SameThreadInvoker
+import space.inevitable.eventbus.post.ExecutionsBundlesBuilder
 import spock.lang.Specification
 
 class SameThreadInvokerTest extends Specification {

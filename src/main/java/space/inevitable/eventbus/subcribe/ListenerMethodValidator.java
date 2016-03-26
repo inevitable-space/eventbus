@@ -7,15 +7,16 @@ import java.util.List;
 
 import space.inevitable.exceptions.ExceptionWithSuggestions;
 import space.inevitable.eventbus.Subscribe;
+import space.inevitable.exceptions.ExceptionWithSuggestionsBuilder;
 
 
 public final class ListenerMethodValidator {
     private final Method method;
-    private final List< String > suggestions;
+    private final ExceptionWithSuggestionsBuilder exceptionWithSuggestionsBuilder;
 
     public ListenerMethodValidator( final Method method ) {
         this.method = method;
-        suggestions = new LinkedList<>();
+        this.exceptionWithSuggestionsBuilder = new ExceptionWithSuggestionsBuilder();
     }
 
     public void validate() {
@@ -35,11 +36,11 @@ public final class ListenerMethodValidator {
         }
 
         final String suggestion = String.format( "Make the return type void. Current return type is %s.", returnType );
-        suggestions.add( suggestion );
+        exceptionWithSuggestionsBuilder.addSuggestion( suggestion );
     }
 
     private void throwExceptionIfNeeded() {
-        if ( suggestions.isEmpty() ) {
+        if ( !exceptionWithSuggestionsBuilder.hasSuggestions() ) {
             return;
         }
 
@@ -48,7 +49,9 @@ public final class ListenerMethodValidator {
         final String declaringClassName = declaringClass.getName();
 
         final String message = String.format( "Method %s of class %s is not eligible to subscribe on the bus.", methodName, declaringClassName );
-        throw new ExceptionWithSuggestions( message, suggestions );
+
+        exceptionWithSuggestionsBuilder.setMessage(message);
+        throw exceptionWithSuggestionsBuilder.build();
     }
 
     private void verifyIsNotPrivate() {
@@ -59,13 +62,13 @@ public final class ListenerMethodValidator {
             return;
         }
 
-        suggestions.add( "Change the method from private to public." );
+        exceptionWithSuggestionsBuilder.addSuggestion( "Change the method from private to public." );
     }
 
     private void verifyMethodIsAnnotated() {
         final boolean isNotAnnotated = !method.isAnnotationPresent( Subscribe.class );
         if ( isNotAnnotated ) {
-            suggestions.add( "Annotate the method with @Subscribe." );
+            exceptionWithSuggestionsBuilder.addSuggestion( "Annotate the method with @Subscribe." );
         }
     }
 
@@ -73,7 +76,7 @@ public final class ListenerMethodValidator {
         final Class< ? >[] parameterTypes = method.getParameterTypes();
 
         if ( parameterTypes.length != 1 ) {
-            suggestions.add( "Declare one argument only." );
+            exceptionWithSuggestionsBuilder.addSuggestion( "Declare one argument only." );
         }
     }
 }

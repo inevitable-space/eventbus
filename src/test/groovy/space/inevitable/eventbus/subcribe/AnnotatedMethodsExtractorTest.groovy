@@ -1,4 +1,4 @@
-package space.inevitable.eventbus.subordinates.subscribe
+package space.inevitable.eventbus.subcribe
 
 import space.inevitable.eventbus.TestAnnotation
 import space.inevitable.eventbus.subcribe.AnnotatedMethodsExtractor

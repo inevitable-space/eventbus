@@ -1,4 +1,4 @@
-package space.inevitable.eventbus
+package space.inevitable.exceptions
 
 import space.inevitable.exceptions.ExceptionWithSuggestions
 import spock.lang.Specification

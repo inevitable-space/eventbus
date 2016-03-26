@@ -5,7 +5,6 @@ import space.inevitable.eventbus.invoker.SameThreadInvoker
 import space.inevitable.eventbus.subcribe.ExecutionBundleSet
 import space.inevitable.eventbus.subcribe.ListenersHostess
 import spock.lang.Specification
-
 import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
 

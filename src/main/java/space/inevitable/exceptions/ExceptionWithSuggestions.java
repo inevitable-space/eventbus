@@ -29,4 +29,6 @@ public class ExceptionWithSuggestions extends IllegalStateException {
 
         return stringBuilder.toString();
     }
+
+
 }

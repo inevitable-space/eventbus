@@ -1,6 +1,6 @@
 package space.inevitable.eventbus.beans
 
-import space.inevitable.eventbus.subordinates.subscribe.ExecutionBundleStubsHolder
+import space.inevitable.eventbus.subcribe.ExecutionBundleStubsHolder
 import spock.lang.Specification
 
 class ExecutionBundleTest extends Specification {

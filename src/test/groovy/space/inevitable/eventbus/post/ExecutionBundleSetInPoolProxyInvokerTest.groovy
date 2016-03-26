@@ -1,10 +1,12 @@
 package space.inevitable.eventbus.post
 
+import space.inevitable.eventbus.collections.ExecutionBundleSet
+import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.invoker.Invoker
 import space.inevitable.eventbus.invoker.SameThreadInvoker
-import space.inevitable.eventbus.collections.ExecutionBundleSet
 import space.inevitable.eventbus.subcribe.ListenersHostess
 import spock.lang.Specification
+
 import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
 
@@ -12,13 +14,13 @@ import static space.inevitable.eventbus.ListenersStubsHolder.*
 
 class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
     private Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap
-    private Map<String, Invoker> invokersByName
+    private InvokersByName invokersByName
     private ListenersInPoolProxyInvoker listenersInPoolProxyInvoker
     private ListenerA listenerA
 
     def setup() {
         executionBundleSetsByTypeMap = new ConcurrentHashMap<>()
-        invokersByName = new ConcurrentHashMap<>()
+        invokersByName = new InvokersByName()
 
         Invoker sameThreadInvoker = new SameThreadInvoker();
         invokersByName.put( "SameThreadInvoker", sameThreadInvoker );

@@ -82,4 +82,19 @@ class ExecutionBundleBuilderTest extends Specification {
         ExceptionWithSuggestions exceptionWithSuggestions = thrown(ExceptionWithSuggestions)
         exceptionWithSuggestions.suggestions.size() == 3
     }
+
+    def "build should return an instance of ExecutionBundle with all the fields not assignd to null"() {
+        when:
+        executionBundleBuilder.setMethod(method)
+        executionBundleBuilder.setListener(listener)
+        executionBundleBuilder.setInvoker(invoker)
+
+        def executionBundle = executionBundleBuilder.build()
+
+        then:
+        executionBundle != null
+        executionBundle.listener != null
+        executionBundle.method != null
+        executionBundle.invoker != null
+    }
 }

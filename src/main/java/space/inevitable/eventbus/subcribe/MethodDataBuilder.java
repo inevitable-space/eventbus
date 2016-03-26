@@ -1,15 +1,15 @@
 package space.inevitable.eventbus.subcribe;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-
 import space.inevitable.eventbus.Subscribe;
 import space.inevitable.eventbus.beans.MethodData;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 
 public final class MethodDataBuilder {
     private final Method method;
 
-    public MethodDataBuilder( final Method method ) {
+    public MethodDataBuilder(final Method method) {
         this.method = method;
     }
 
@@ -19,21 +19,21 @@ public final class MethodDataBuilder {
         final String methodName = method.getName();
 
         final Type[] genericParameterTypes = method.getGenericParameterTypes();
-        final Type eventType = genericParameterTypes[ 0 ];
+        final Type eventType = genericParameterTypes[0];
 
-        final Subscribe annotation = method.getAnnotation( Subscribe.class );
+        final Subscribe annotation = method.getAnnotation(Subscribe.class);
         final String invokerName = annotation.value();
 
         return new MethodData(
-                                     methodName,
-                                     eventType,
-                                     method,
-                                     invokerName
+                methodName,
+                eventType,
+                method,
+                invokerName
         );
     }
 
     private void validateMethod() {
-        final ListenerMethodValidator methodValidator = new ListenerMethodValidator( method );
+        final ListenerMethodValidator methodValidator = new ListenerMethodValidator(method);
         methodValidator.validate();
     }
 }

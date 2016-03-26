@@ -8,7 +8,7 @@ class InvokerRunnable implements Runnable {
     private final Object listener;
     private final Object eventInstance;
 
-    public InvokerRunnable( final Method method, final Object listener, final Object eventInstance ) {
+    public InvokerRunnable(final Method method, final Object listener, final Object eventInstance) {
         this.method = method;
         this.listener = listener;
         this.eventInstance = eventInstance;
@@ -17,8 +17,8 @@ class InvokerRunnable implements Runnable {
     @Override
     public void run() {
         try {
-            method.invoke( listener, eventInstance );
-        } catch ( IllegalAccessException | InvocationTargetException e ) {
+            method.invoke(listener, eventInstance);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

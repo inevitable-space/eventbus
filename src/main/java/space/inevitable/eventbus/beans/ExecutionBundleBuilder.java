@@ -5,35 +5,35 @@ import space.inevitable.exceptions.ExceptionWithSuggestionsBuilder;
 
 import java.lang.reflect.Method;
 
-public class ExecutionBundleBuilder {
-    private ExceptionWithSuggestionsBuilder exceptionWithSuggestionsBuilder;
+public final class ExecutionBundleBuilder {
+    private final ExceptionWithSuggestionsBuilder exceptionWithSuggestionsBuilder;
     private Invoker invoker;
     private Object listener;
     private Method method;
 
-    public ExecutionBundleBuilder(){
+    public ExecutionBundleBuilder() {
         exceptionWithSuggestionsBuilder = new ExceptionWithSuggestionsBuilder();
     }
 
     public ExecutionBundle build() {
         validate();
-
-        return new ExecutionBundle(null, null, null);
+        return new ExecutionBundle(listener, method, invoker);
     }
 
-    private void validate(){
+    private void validate() {
         validateInvoker();
         validateListener();
         validateMethod();
-        if( !exceptionWithSuggestionsBuilder.hasSuggestions() ){
+        if (!exceptionWithSuggestionsBuilder.hasSuggestions()) {
             return;
         }
 
+        exceptionWithSuggestionsBuilder.setMessage("Make sure all the fields are set before trying to build an instance of [ExecutionBundle].");
         throw exceptionWithSuggestionsBuilder.build();
     }
 
     private void validateInvoker() {
-        if(invoker != null){
+        if (invoker != null) {
             return;
         }
 
@@ -41,7 +41,7 @@ public class ExecutionBundleBuilder {
     }
 
     private void validateListener() {
-        if(listener != null){
+        if (listener != null) {
             return;
         }
 
@@ -49,22 +49,22 @@ public class ExecutionBundleBuilder {
     }
 
     private void validateMethod() {
-        if(method != null){
+        if (method != null) {
             return;
         }
 
         exceptionWithSuggestionsBuilder.addSuggestion("Can not build with out [Method] instance as listener. Please use setMethod.");
     }
 
-    public void setListener(Object listener) {
+    public void setListener(final Object listener) {
         this.listener = listener;
     }
 
-    public void setInvoker(Invoker invoker) {
+    public void setInvoker(final Invoker invoker) {
         this.invoker = invoker;
     }
 
-    public void setMethod(Method method) {
+    public void setMethod(final Method method) {
         this.method = method;
     }
 }

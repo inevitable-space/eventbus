@@ -1,24 +1,25 @@
 package space.inevitable.eventbus.subcribe
 
-import space.inevitable.eventbus.invoker.Invoker
 import space.inevitable.eventbus.ListenersStubsHolder.EventA
 import space.inevitable.eventbus.ListenersStubsHolder.EventB
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerB
-import space.inevitable.eventbus.invoker.SameThreadInvoker
 import space.inevitable.eventbus.collections.ExecutionBundleSet
+import space.inevitable.eventbus.collections.InvokersByName
+import space.inevitable.eventbus.invoker.Invoker
+import space.inevitable.eventbus.invoker.SameThreadInvoker
 import spock.lang.Specification
 
 import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
 
 class ListenersPoolsHostessTestSet extends Specification {
-    private Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap = new ConcurrentHashMap<>()
-    private Map<String, Invoker> invokersByName = new ConcurrentHashMap<>()
+    private Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap
+    private InvokersByName invokersByName
 
     def setup() {
         executionBundleSetsByTypeMap = new ConcurrentHashMap<>();
-        invokersByName = new ConcurrentHashMap<>();
+        invokersByName = new InvokersByName()
         Invoker invoker = new SameThreadInvoker();
         invokersByName.put( invoker.getName(), invoker )
     }

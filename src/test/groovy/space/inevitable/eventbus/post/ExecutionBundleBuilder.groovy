@@ -5,7 +5,7 @@ import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.beans.ExecutionBundle
 import space.inevitable.eventbus.invoker.SameThreadInvoker
 
-public class ExecutionsBundlesBuilder {
+public class ExecutionBundleBuilder {
     public static ExecutionBundle buildExecutionBundleSameThread() {
         ListenerA listenerA = new ListenerA();
         def method = ListenerA.class.getMethod( "methodA", EventA.class )

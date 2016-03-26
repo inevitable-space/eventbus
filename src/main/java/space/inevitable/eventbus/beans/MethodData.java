@@ -9,7 +9,7 @@ public final class MethodData {
     private final Method method;
     private final String invokerName;
 
-    public MethodData( final String methodName, final Type eventType, final Method method, final String invokerName ) {
+    public MethodData(final String methodName, final Type eventType, final Method method, final String invokerName) {
         this.methodName = methodName;
         this.eventType = eventType;
         this.method = method;

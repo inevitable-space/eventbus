@@ -1,41 +1,42 @@
 package space.inevitable.eventbus;
 
+import space.inevitable.eventbus.collections.ExecutionBundleSet;
+import space.inevitable.eventbus.collections.InvokersByName;
+import space.inevitable.eventbus.invoker.Invoker;
+import space.inevitable.eventbus.invoker.SameThreadInvoker;
+import space.inevitable.eventbus.post.ListenersInPoolProxyInvoker;
+import space.inevitable.eventbus.subcribe.ListenersHostess;
+
 import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import space.inevitable.eventbus.invoker.Invoker;
-import space.inevitable.eventbus.invoker.SameThreadInvoker;
-import space.inevitable.eventbus.post.ListenersInPoolProxyInvoker;
-import space.inevitable.eventbus.collections.ExecutionBundleSet;
-import space.inevitable.eventbus.subcribe.ListenersHostess;
-
 
 public final class EventBus {
-    private final Map< String, Invoker > invokersByName = new ConcurrentHashMap<>();
-
+    private final InvokersByName invokersByName;
     private final ListenersHostess listenersHostess;
     private final ListenersInPoolProxyInvoker listenersInPoolProxyInvoker;
 
     public EventBus() {
-        final Map< Type, ExecutionBundleSet > executionBundleSetsByTypeMap = new ConcurrentHashMap<>();
+        final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap = new ConcurrentHashMap<>();
 
-        listenersHostess = new ListenersHostess( executionBundleSetsByTypeMap, invokersByName );
-        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker( executionBundleSetsByTypeMap );
+        invokersByName = new InvokersByName();
+        listenersHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName);
+        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundleSetsByTypeMap);
 
         final Invoker sameThreadInvoker = new SameThreadInvoker();
-        addInvoker( sameThreadInvoker );
+        addInvoker(sameThreadInvoker);
     }
 
-    public void subscribe( final Object listener ) {
-        listenersHostess.host( listener );
+    public void subscribe(final Object listener) {
+        listenersHostess.host(listener);
     }
 
-    public void post( final Object eventInstance ) {
-        listenersInPoolProxyInvoker.invokeListenersForEvent( eventInstance );
+    public void post(final Object eventInstance) {
+        listenersInPoolProxyInvoker.invokeListenersForEvent(eventInstance);
     }
 
-    public void addInvoker( final Invoker invoker ) {
-        invokersByName.put( invoker.getName(), invoker );
+    public void addInvoker(final Invoker invoker) {
+        invokersByName.put(invoker.getName(), invoker);
     }
 }

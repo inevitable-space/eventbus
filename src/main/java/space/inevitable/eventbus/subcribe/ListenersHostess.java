@@ -6,6 +6,7 @@ import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.beans.ExecutionBundleBuilder;
 import space.inevitable.eventbus.beans.MethodData;
 import space.inevitable.eventbus.collections.ExecutionBundleSet;
+import space.inevitable.eventbus.collections.InvokersByName;
 import space.inevitable.eventbus.invoker.Invoker;
 
 import java.lang.reflect.Method;
@@ -16,23 +17,23 @@ import java.util.Map;
 
 public final class ListenersHostess {
     private final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap;
-    private final Map<String, Invoker> invokersByName;
+    private final InvokersByName invokersByName;
 
 
-    public ListenersHostess(final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap, final Map<String, Invoker> invokersByName) {
+    public ListenersHostess(final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap, final InvokersByName invokersByName) {
         this.executionBundleSetsByTypeMap = executionBundleSetsByTypeMap;
         this.invokersByName = invokersByName;
     }
 
-    public void host(final Object object) {
-        final List<Method> annotatedMethods = extractAnnotatedMethods(object);
+    public void host(final Object listener) {
+        final List<Method> annotatedMethods = extractAnnotatedMethods(listener);
         final List<MethodData> methodsData = buildMethodsData(annotatedMethods);
 
         for (final MethodData methodData : methodsData) {
-            final ExecutionBundle executionBundle = buildExecutionBundle(object, methodData);
+            final ExecutionBundle executionBundle = buildExecutionBundle(listener, methodData);
 
             final Type type = methodData.getEventType();
-            final ExecutionBundleSet executionBundleSet = getPoolForType(type);
+            final ExecutionBundleSet executionBundleSet = getExecutionBundleSetForType(type);
             executionBundleSet.add(executionBundle);
         }
     }
@@ -49,28 +50,19 @@ public final class ListenersHostess {
         executionBundleBuilder.setMethod(method);
 
         return executionBundleBuilder.build();
-
-        /*
-        if (invoker == null) {
-            String message = "Invoker under the name: [" + invokerName + "] is not registered.";
-            message += "\n FIX: use the method addInvoker of the event bus.";
-            message += "\nSee the JavaDoc of the invoker interface.";
-            throw new IllegalStateException(message);
-        }
-
-        return new ExecutionBundle(listener, method, invoker);
-        */
     }
 
-    private ExecutionBundleSet getPoolForType(final Type type) {
+    private ExecutionBundleSet getExecutionBundleSetForType(final Type type) {
         final boolean containsPoolForType = executionBundleSetsByTypeMap.containsKey(type);
+        ExecutionBundleSet executionBundleSet;
 
         if (containsPoolForType) {
-            return executionBundleSetsByTypeMap.get(type);
+            executionBundleSet = executionBundleSetsByTypeMap.get(type);
+        } else {
+            executionBundleSet = new ExecutionBundleSet();
+            executionBundleSetsByTypeMap.put(type, executionBundleSet);
         }
 
-        final ExecutionBundleSet executionBundleSet = new ExecutionBundleSet();
-        executionBundleSetsByTypeMap.put(type, executionBundleSet);
         return executionBundleSet;
     }
 

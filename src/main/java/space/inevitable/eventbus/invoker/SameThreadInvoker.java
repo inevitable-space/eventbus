@@ -1,19 +1,22 @@
 package space.inevitable.eventbus.invoker;
 
+import space.inevitable.eventbus.beans.ExecutionBundle;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import space.inevitable.eventbus.beans.ExecutionBundle;
-
 
 public final class SameThreadInvoker implements Invoker {
-    public void invoke( final ExecutionBundle executionBundle, final Object eventInstance ) {
+    public SameThreadInvoker() {
+    }
+
+    public void invoke(final ExecutionBundle executionBundle, final Object eventInstance) {
         final Method method = executionBundle.getMethod();
         final Object listener = executionBundle.getListener();
-
+        //TODO : Clean V-DL
         try {
-            method.invoke( listener, eventInstance );
-        } catch ( IllegalAccessException | InvocationTargetException e ) {
+            method.invoke(listener, eventInstance);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

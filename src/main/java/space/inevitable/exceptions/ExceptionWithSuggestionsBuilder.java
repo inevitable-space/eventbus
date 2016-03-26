@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ExceptionWithSuggestionsBuilder {
-    private final List< String > suggestions;
+    private final List<String> suggestions;
     private String message;
 
-    public ExceptionWithSuggestionsBuilder(){
+    public ExceptionWithSuggestionsBuilder() {
         suggestions = new LinkedList<>();
     }
 
@@ -15,15 +15,15 @@ public class ExceptionWithSuggestionsBuilder {
         return new ExceptionWithSuggestions(message, suggestions);
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 
-    public void addSuggestion(String suggestion) {
+    public void addSuggestion(final  String suggestion) {
         suggestions.add(suggestion);
     }
 
-    public boolean hasSuggestions(){
+    public boolean hasSuggestions() {
         return !suggestions.isEmpty();
     }
 }

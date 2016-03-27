@@ -1,8 +1,11 @@
 package space.inevitable.eventbus.beans;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+@Immutable
 public final class MethodData {
     private final String methodName;
     private final Type eventType;

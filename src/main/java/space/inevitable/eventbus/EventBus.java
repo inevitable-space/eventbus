@@ -28,14 +28,23 @@ public final class EventBus {
         addInvoker(sameThreadInvoker);
     }
 
+    /**
+     * @param listener to be subscribed to the event bus
+     */
     public void subscribe(final Object listener) {
         listenersHostess.host(listener);
     }
 
+    /**
+     * @param eventInstance to be passed to each method, listening to its type, with in a invocation made by an invoker
+     */
     public void post(final Object eventInstance) {
         listenersInPoolProxyInvoker.invokeListenersForEvent(eventInstance);
     }
 
+    /**
+     * @param invoker to by attached to the event bus
+     */
     public void addInvoker(final Invoker invoker) {
         invokersByName.put(invoker.getName(), invoker);
     }

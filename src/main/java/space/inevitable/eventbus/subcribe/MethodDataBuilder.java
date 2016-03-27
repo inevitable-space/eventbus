@@ -22,7 +22,7 @@ public final class MethodDataBuilder {
         final Type eventType = genericParameterTypes[0];
 
         final Subscribe annotation = method.getAnnotation(Subscribe.class);
-        final String invokerName = annotation.value();
+        final String invokerName = extractInvokerName(annotation);
 
         return new MethodData(
                 methodName,
@@ -30,6 +30,10 @@ public final class MethodDataBuilder {
                 method,
                 invokerName
         );
+    }
+
+    private String extractInvokerName(final Subscribe annotation){
+        return annotation.value();
     }
 
     private void validateMethod() {

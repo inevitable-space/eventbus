@@ -1,10 +1,12 @@
 package space.inevitable.eventbus.beans;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import space.inevitable.eventbus.invoker.Invoker;
 import space.inevitable.exceptions.ExceptionWithSuggestionsBuilder;
 
 import java.lang.reflect.Method;
 
+@Immutable
 public final class ExecutionBundleBuilder {
     private final ExceptionWithSuggestionsBuilder exceptionWithSuggestionsBuilder;
     private Invoker invoker;

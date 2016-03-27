@@ -1,10 +1,12 @@
 package space.inevitable.eventbus.beans;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import space.inevitable.eventbus.invoker.Invoker;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+@Immutable
 public final class ExecutionBundle {
     private final Object listener;
     private final Method method;

@@ -23,7 +23,7 @@ public class ExceptionWithSuggestionsBuilder {
         suggestions.add(suggestion);
     }
 
-    public boolean hasSuggestions() {
-        return !suggestions.isEmpty();
+    public boolean hasNoSuggestions() {
+        return suggestions.isEmpty();
     }
 }

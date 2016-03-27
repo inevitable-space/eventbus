@@ -26,11 +26,13 @@ public final class ExecutionBundleBuilder {
         validateInvoker();
         validateListener();
         validateMethod();
-        if (!exceptionWithSuggestionsBuilder.hasSuggestions()) {
+
+        if (exceptionWithSuggestionsBuilder.hasNoSuggestions()) {
             return;
         }
 
-        exceptionWithSuggestionsBuilder.setMessage("Make sure all the fields are set before trying to build an instance of [ExecutionBundle].");
+        String message = "Make sure all the fields are set before trying to build an instance of [ExecutionBundle].";
+        exceptionWithSuggestionsBuilder.setMessage(message);
         throw exceptionWithSuggestionsBuilder.build();
     }
 

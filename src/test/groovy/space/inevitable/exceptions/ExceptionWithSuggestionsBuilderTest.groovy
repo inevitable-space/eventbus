@@ -44,16 +44,16 @@ class ExceptionWithSuggestionsBuilderTest extends Specification {
         exceptionWithSuggestions.message == "TEST\nA"
     }
 
-    def "hasSuggestions should return false when no suggestions were added"() {
+    def "hasNoSuggestions should return false when no suggestions were added"() {
         expect:
-        !exceptionWithSuggestionsBuilder.hasSuggestions()
+        exceptionWithSuggestionsBuilder.hasNoSuggestions()
     }
 
-    def "hasSuggestions should return true when suggestions were added"() {
+    def "hasNoSuggestions should return true when suggestions were added"() {
         when:
         exceptionWithSuggestionsBuilder.addSuggestion("A")
 
         then:
-        exceptionWithSuggestionsBuilder.hasSuggestions()
+        !exceptionWithSuggestionsBuilder.hasNoSuggestions()
     }
 }

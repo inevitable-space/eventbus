@@ -1,13 +1,14 @@
 package space.inevitable.eventbus
 
+import space.inevitable.patterns.Builder
 import spock.lang.Specification
 
 class EventBusExample extends Specification {
     def "How to set up and use"() {
-        given: //The minimum set up of event bus
+        given: //The minimum set up to use the event bus
 
-        StandardEventBusBuilder standardEventBusBuilder = new StandardEventBusBuilder();
-        EventBus eventBus = standardEventBusBuilder.build();
+        Builder<StandardEventBus> standardEventBusBuilder = new StandardEventBusBuilder(); //notice that StandardEventBus needs to be created by the its builder
+        EventBus eventBus = standardEventBusBuilder.build(); //notice that EventBus is an Interface that
 
         when: //A instance of SubscriberClass (could be any of your classes) wants to subscribe in to the bus
 

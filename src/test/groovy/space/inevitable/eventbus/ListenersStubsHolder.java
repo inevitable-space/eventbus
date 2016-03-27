@@ -24,6 +24,7 @@ public class ListenersStubsHolder {
     }
 
     public static final class ListenerB {
+        @SuppressWarnings("EmptyMethod") //Testing purposes
         @Subscribe
         public void methodA(final EventB eventB) {
         }

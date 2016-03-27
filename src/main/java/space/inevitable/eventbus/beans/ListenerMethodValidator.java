@@ -25,7 +25,7 @@ public final class ListenerMethodValidator {
     }
 
     private void throwExceptionIfNeeded() {
-        if (!exceptionWithSuggestionsBuilder.hasSuggestions()) {
+        if (exceptionWithSuggestionsBuilder.hasNoSuggestions()) {
             return;
         }
 

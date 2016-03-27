@@ -1,5 +1,6 @@
 package space.inevitable.eventbus.post
 
+import space.inevitable.eventbus.EventBus
 import space.inevitable.eventbus.collections.ExecutionBundleSet
 import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.invoke.Invoker
@@ -10,6 +11,7 @@ import spock.lang.Specification
 import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
 
+import static org.mockito.Mockito.mock
 import static space.inevitable.eventbus.ListenersStubsHolder.*
 
 class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
@@ -19,10 +21,12 @@ class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
     private ListenerA listenerA
 
     def setup() {
+        EventBus eventBus = mock(EventBus)
+
         executionBundleSetsByTypeMap = new ConcurrentHashMap<>()
         invokersByName = new InvokersByName()
 
-        Invoker sameThreadInvoker = new SameThreadInvoker();
+        Invoker sameThreadInvoker = new SameThreadInvoker(eventBus);
         invokersByName.put("SameThreadInvoker", sameThreadInvoker);
 
         listenerA = new ListenerA()

@@ -1,5 +1,6 @@
 package space.inevitable.eventbus.subcribe
 
+import space.inevitable.eventbus.EventBus
 import space.inevitable.eventbus.ListenersStubsHolder.EventA
 import space.inevitable.eventbus.ListenersStubsHolder.EventB
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
@@ -13,14 +14,18 @@ import spock.lang.Specification
 import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
 
+import static org.mockito.Mockito.mock
+
 class ListenersPoolsHostessTestSet extends Specification {
     private Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap
     private InvokersByName invokersByName
 
     def setup() {
+        EventBus eventBus = mock(EventBus)
+
         executionBundleSetsByTypeMap = new ConcurrentHashMap<>();
         invokersByName = new InvokersByName()
-        Invoker invoker = new SameThreadInvoker();
+        Invoker invoker = new SameThreadInvoker(eventBus);
         invokersByName.put(invoker.getName(), invoker)
     }
 

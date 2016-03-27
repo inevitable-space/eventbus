@@ -6,6 +6,7 @@ import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerC
 import space.inevitable.eventbus.beans.ExecutionBundle
 import space.inevitable.eventbus.invoke.Invoker
+import space.inevitable.patterns.Builder
 import spock.lang.Specification
 
 class StandardEventBusTest extends Specification {
@@ -18,7 +19,7 @@ class StandardEventBusTest extends Specification {
         listenerA = new ListenerA()
         listenerC = new ListenerC()
 
-        StandardEventBusBuilder standardEventBusBuilder = new StandardEventBusBuilder()
+        Builder<EventBus> standardEventBusBuilder = new StandardEventBusBuilder()
         eventBus = standardEventBusBuilder.build()
 
         testInvoker = new TestInvoker()

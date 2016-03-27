@@ -21,8 +21,8 @@ class InvokerRunnable implements Runnable {
     public void run() {
         try {
             method.invoke(listener, eventInstance);
-        } catch (Exception e) {
-            final UnhandledExceptionEvent unhandledExceptionEvent = new UnhandledExceptionEvent(e);
+        } catch (Exception unhandledException) {
+            final UnhandledExceptionEvent unhandledExceptionEvent = new UnhandledExceptionEvent(unhandledException);
             eventBus.post(unhandledExceptionEvent);
         }
     }

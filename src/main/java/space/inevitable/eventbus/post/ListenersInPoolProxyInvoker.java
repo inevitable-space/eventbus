@@ -27,7 +27,7 @@ public final class ListenersInPoolProxyInvoker {
 
     private void invokeListenersInPool(final Iterable<ExecutionBundle> executionBundles, final Object eventInstance) {
         for (final ExecutionBundle executionBundle : executionBundles) {
-            //TODO : Clean V-DL
+
             final Invoker invoker = executionBundle.getInvoker();
             invoker.invoke(executionBundle, eventInstance);
         }

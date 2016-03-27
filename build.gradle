@@ -1,5 +1,5 @@
 group 'space.inevitable'
-version '0.0.0'
+version '0.0.1'
 
 apply plugin: 'groovy'
 apply plugin: 'java'

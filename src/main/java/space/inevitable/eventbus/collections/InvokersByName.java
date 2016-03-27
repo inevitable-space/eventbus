@@ -1,6 +1,6 @@
 package space.inevitable.eventbus.collections;
 
-import space.inevitable.eventbus.invoker.Invoker;
+import space.inevitable.eventbus.invoke.Invoker;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

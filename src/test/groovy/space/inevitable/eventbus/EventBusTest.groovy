@@ -5,7 +5,7 @@ import space.inevitable.eventbus.ListenersStubsHolder.EventC
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerC
 import space.inevitable.eventbus.beans.ExecutionBundle
-import space.inevitable.eventbus.invoker.Invoker
+import space.inevitable.eventbus.invoke.Invoker
 import spock.lang.Specification
 
 class EventBusTest extends Specification {

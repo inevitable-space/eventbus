@@ -2,7 +2,7 @@ package space.inevitable.eventbus.post;
 
 import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.collections.ExecutionBundleSet;
-import space.inevitable.eventbus.invoker.Invoker;
+import space.inevitable.eventbus.invoke.Invoker;
 
 import java.lang.reflect.Type;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package space.inevitable.eventbus.subcribe
+package space.inevitable.eventbus.beans
+
 import space.inevitable.exceptions.ExceptionWithSuggestions
-import space.inevitable.eventbus.beans.MethodData
 import spock.lang.Specification
 import java.lang.reflect.Method
 import java.lang.reflect.Type

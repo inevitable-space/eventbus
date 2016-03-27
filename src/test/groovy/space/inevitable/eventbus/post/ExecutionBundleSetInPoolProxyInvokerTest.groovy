@@ -2,8 +2,8 @@ package space.inevitable.eventbus.post
 
 import space.inevitable.eventbus.collections.ExecutionBundleSet
 import space.inevitable.eventbus.collections.InvokersByName
-import space.inevitable.eventbus.invoker.Invoker
-import space.inevitable.eventbus.invoker.SameThreadInvoker
+import space.inevitable.eventbus.invoke.Invoker
+import space.inevitable.eventbus.invoke.SameThreadInvoker
 import space.inevitable.eventbus.subcribe.ListenersHostess
 import spock.lang.Specification
 

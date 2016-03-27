@@ -1,13 +1,12 @@
 package space.inevitable.eventbus.beans
 
-import space.inevitable.eventbus.invoker.Invoker
-import space.inevitable.eventbus.subcribe.MethodSamplesStubHolder
+import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.exceptions.ExceptionWithSuggestions
 import spock.lang.Specification
 
 import java.lang.reflect.Method
 
-class ExecutionBundleBuilderTest extends Specification {
+class ExecutionBundleBuilderForTestTest extends Specification {
     private ExecutionBundleBuilder executionBundleBuilder;
     private Invoker invoker
     private Object listener

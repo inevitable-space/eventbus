@@ -7,8 +7,8 @@ import space.inevitable.eventbus.ListenersStubsHolder.EventB;
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA;
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerB;
 import space.inevitable.eventbus.beans.ExecutionBundle;
-import space.inevitable.eventbus.invoker.Invoker;
-import space.inevitable.eventbus.invoker.SameThreadInvoker;
+import space.inevitable.eventbus.invoke.Invoker;
+import space.inevitable.eventbus.invoke.SameThreadInvoker;
 
 public final class ExecutionBundleStubsHolder {
     private ExecutionBundleStubsHolder(){

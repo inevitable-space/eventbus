@@ -1,4 +1,4 @@
-package space.inevitable.eventbus.subcribe;
+package space.inevitable.reflection;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

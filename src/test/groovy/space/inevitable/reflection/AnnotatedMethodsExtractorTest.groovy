@@ -1,7 +1,7 @@
-package space.inevitable.eventbus.subcribe
+package space.inevitable.reflection
 
 import space.inevitable.eventbus.TestAnnotation
-import space.inevitable.eventbus.subcribe.AnnotatedMethodsExtractor
+import space.inevitable.reflection.AnnotatedMethodsExtractor
 import spock.lang.Specification
 
 import java.lang.reflect.Method

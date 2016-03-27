@@ -1,6 +1,7 @@
 package space.inevitable.eventbus.subcribe;
 
 import space.inevitable.eventbus.beans.MethodData;
+import space.inevitable.eventbus.beans.MethodDataBuilder;
 
 import java.lang.reflect.Method;
 import java.util.LinkedList;

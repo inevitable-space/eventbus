@@ -1,4 +1,4 @@
-package space.inevitable.eventbus.subcribe;
+package space.inevitable.eventbus.beans;
 
 import space.inevitable.eventbus.Subscribe;
 import space.inevitable.exceptions.ExceptionWithSuggestionsBuilder;

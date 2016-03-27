@@ -1,6 +1,6 @@
 package space.inevitable.eventbus.collections
 
-import space.inevitable.eventbus.invoker.Invoker
+import space.inevitable.eventbus.invoke.Invoker
 import spock.lang.Specification
 
 class InvokersByNameTest extends Specification {

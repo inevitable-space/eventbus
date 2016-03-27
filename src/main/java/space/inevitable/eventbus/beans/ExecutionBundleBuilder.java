@@ -1,7 +1,7 @@
 package space.inevitable.eventbus.beans;
 
 import jdk.nashorn.internal.ir.annotations.Immutable;
-import space.inevitable.eventbus.invoker.Invoker;
+import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.exceptions.ExceptionWithSuggestionsBuilder;
 
 import java.lang.reflect.Method;

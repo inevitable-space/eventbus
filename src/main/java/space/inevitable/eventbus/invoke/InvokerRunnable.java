@@ -1,4 +1,4 @@
-package space.inevitable.eventbus.invoker;
+package space.inevitable.eventbus.invoke;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

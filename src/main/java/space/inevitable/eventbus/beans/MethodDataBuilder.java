@@ -1,7 +1,6 @@
-package space.inevitable.eventbus.subcribe;
+package space.inevitable.eventbus.beans;
 
 import space.inevitable.eventbus.Subscribe;
-import space.inevitable.eventbus.beans.MethodData;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;

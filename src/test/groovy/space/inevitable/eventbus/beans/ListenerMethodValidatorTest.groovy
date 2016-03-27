@@ -1,5 +1,7 @@
-package space.inevitable.eventbus.subcribe
+package space.inevitable.eventbus.beans
 
+import space.inevitable.eventbus.beans.ListenerMethodValidator
+import space.inevitable.eventbus.beans.MethodSamplesStubHolder
 import space.inevitable.exceptions.ExceptionWithSuggestions
 import spock.lang.Specification
 import java.lang.reflect.Method

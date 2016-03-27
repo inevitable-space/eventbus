@@ -1,6 +1,5 @@
 package space.inevitable.reflection
 
-import space.inevitable.eventbus.TestAnnotation
 import spock.lang.Specification
 
 import java.lang.reflect.Method

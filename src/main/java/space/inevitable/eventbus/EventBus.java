@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-public final class EventBus {
+public final class EventBus implements EventBusI {
     private final InvokersByName invokersByName;
     private final ListenersHostess listenersHostess;
     private final ListenersInPoolProxyInvoker listenersInPoolProxyInvoker;
@@ -24,7 +24,7 @@ public final class EventBus {
         listenersHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName);
         listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundleSetsByTypeMap);
 
-        final Invoker sameThreadInvoker = new SameThreadInvoker();
+        final Invoker sameThreadInvoker = new SameThreadInvoker(this);
         addInvoker(sameThreadInvoker);
     }
 

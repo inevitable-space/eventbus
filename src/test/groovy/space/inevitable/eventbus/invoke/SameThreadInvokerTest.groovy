@@ -19,6 +19,4 @@ class SameThreadInvokerTest extends Specification {
         then:
         listenerA.wasMethodAInvoked()
     }
-
-
 }

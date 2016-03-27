@@ -1,4 +1,4 @@
-package space.inevitable.eventbus;
+package space.inevitable.reflection;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

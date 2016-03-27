@@ -31,7 +31,7 @@ public final class MethodDataBuilder {
         );
     }
 
-    private String extractInvokerName(final Subscribe annotation){
+    private String extractInvokerName(final Subscribe annotation) {
         return annotation.value();
     }
 

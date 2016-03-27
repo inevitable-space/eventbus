@@ -2,11 +2,9 @@ package space.inevitable.eventbus.subcribe
 
 import space.inevitable.eventbus.Subscribe
 import space.inevitable.eventbus.beans.MethodData
-import space.inevitable.eventbus.subcribe.MethodsDataBuilder
 import spock.lang.Specification
 
 import java.lang.reflect.Method
-
 
 class MethodsDataBuilderTest extends Specification {
 
@@ -15,7 +13,7 @@ class MethodsDataBuilderTest extends Specification {
         List<Method> methods = buildMethods()
 
         when:
-        MethodsDataBuilder methodsDataBuilder = new MethodsDataBuilder( methods )
+        MethodsDataBuilder methodsDataBuilder = new MethodsDataBuilder(methods)
         List<MethodData> methodsData = methodsDataBuilder.build()
 
         then:
@@ -24,22 +22,22 @@ class MethodsDataBuilderTest extends Specification {
 
     public static final class MethodsHolder {
         @Subscribe
-        public void methodA( String event ) {
+        public void methodA(String event) {
         }
 
         @Subscribe
-        public void methodB( String event ) {
+        public void methodB(String event) {
         }
     }
 
     private static List<Method> buildMethods() {
         List<Method> methods = new LinkedList<>()
 
-        Method methodA = MethodsHolder.class.getMethod( "methodA", String );
-        Method methodB = MethodsHolder.class.getMethod( "methodB", String );
+        Method methodA = MethodsHolder.class.getMethod("methodA", String);
+        Method methodB = MethodsHolder.class.getMethod("methodB", String);
 
-        methods.add( methodA )
-        methods.add( methodB )
+        methods.add(methodA)
+        methods.add(methodB)
 
         methods
     }

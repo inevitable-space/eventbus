@@ -19,7 +19,7 @@ public class ExceptionWithSuggestionsBuilder {
         this.message = message;
     }
 
-    public void addSuggestion(final  String suggestion) {
+    public void addSuggestion(final String suggestion) {
         suggestions.add(suggestion);
     }
 

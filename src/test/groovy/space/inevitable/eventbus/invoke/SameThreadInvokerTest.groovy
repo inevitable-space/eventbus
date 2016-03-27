@@ -11,10 +11,10 @@ class SameThreadInvokerTest extends Specification {
         def executionBundle = ExecutionBundleBuilderForTest.buildExecutionBundleSameThread()
 
         def sameThreadInvoker = new SameThreadInvoker()
-        def listenerA = ( ListenersStubsHolder.ListenerA ) executionBundle.getListener()
+        def listenerA = (ListenersStubsHolder.ListenerA) executionBundle.getListener()
 
         when:
-        sameThreadInvoker.invoke( executionBundle, eventA )
+        sameThreadInvoker.invoke(executionBundle, eventA)
 
         then:
         listenerA.wasMethodAInvoked()

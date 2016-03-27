@@ -1,7 +1,5 @@
 package space.inevitable.eventbus.subcribe;
 
-import java.lang.reflect.Method;
-
 import space.inevitable.eventbus.ListenersStubsHolder.EventA;
 import space.inevitable.eventbus.ListenersStubsHolder.EventB;
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA;
@@ -10,10 +8,9 @@ import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.eventbus.invoke.SameThreadInvoker;
 
-public final class ExecutionBundleStubsHolder {
-    private ExecutionBundleStubsHolder(){
-    }
+import java.lang.reflect.Method;
 
+public final class ExecutionBundleStubsHolder {
     private static ExecutionBundle executionBundleA;
     private static ExecutionBundle executionBundleACopy;
     private static ExecutionBundle executionBundleB;
@@ -21,22 +18,25 @@ public final class ExecutionBundleStubsHolder {
     static {
         try {
             init();
-        } catch ( NoSuchMethodException ignore ) {
+        } catch (NoSuchMethodException ignore) {
         }
+    }
+
+    private ExecutionBundleStubsHolder() {
     }
 
     private static void init() throws NoSuchMethodException {
         ListenerA listenerA = new ListenerA();
-        Method methodA = listenerA.getClass().getMethod( "methodA", EventA.class );
+        Method methodA = listenerA.getClass().getMethod("methodA", EventA.class);
         Invoker invoker = new SameThreadInvoker();
 
-        executionBundleA = new ExecutionBundle( listenerA, methodA, invoker );
-        executionBundleACopy = new ExecutionBundle( listenerA, methodA, invoker );
+        executionBundleA = new ExecutionBundle(listenerA, methodA, invoker);
+        executionBundleACopy = new ExecutionBundle(listenerA, methodA, invoker);
 
         ListenerB listenerB = new ListenerB();
-        methodA = listenerB.getClass().getMethod( "methodA", EventB.class );
+        methodA = listenerB.getClass().getMethod("methodA", EventB.class);
 
-        executionBundleB = new ExecutionBundle( listenerB, methodA, invoker );
+        executionBundleB = new ExecutionBundle(listenerB, methodA, invoker);
     }
 
     public static ExecutionBundle getExecutionBundleA() {

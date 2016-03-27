@@ -18,21 +18,21 @@ public class ListenersStubsHolder {
         }
 
         @Subscribe
-        public void methodA( final EventA eventA ) {
+        public void methodA(final EventA eventA) {
             methodAInvoked = true;
         }
     }
 
     public static final class ListenerB {
         @Subscribe
-        public void methodA( final EventB eventB ) {
+        public void methodA(final EventB eventB) {
         }
     }
 
     public static final class ListenerC {
-        @SuppressWarnings( "EmptyMethod" ) //Testing purposes
-        @Subscribe( "TestInvokerName" )
-        public void methodA( final EventC eventC ) {
+        @SuppressWarnings("EmptyMethod") //Testing purposes
+        @Subscribe("TestInvokerName")
+        public void methodA(final EventC eventC) {
         }
     }
 }

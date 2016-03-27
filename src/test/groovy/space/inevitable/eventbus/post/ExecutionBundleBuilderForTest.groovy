@@ -8,9 +8,9 @@ import space.inevitable.eventbus.invoke.SameThreadInvoker
 public class ExecutionBundleBuilderForTest {
     public static ExecutionBundle buildExecutionBundleSameThread() {
         ListenerA listenerA = new ListenerA();
-        def method = ListenerA.class.getMethod( "methodA", EventA.class )
+        def method = ListenerA.class.getMethod("methodA", EventA.class)
 
         def sameThreadInvoker = new SameThreadInvoker();
-        new ExecutionBundle( listenerA, method, sameThreadInvoker );
+        new ExecutionBundle(listenerA, method, sameThreadInvoker);
     }
 }

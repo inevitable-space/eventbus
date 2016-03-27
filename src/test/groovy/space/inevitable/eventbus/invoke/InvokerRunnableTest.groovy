@@ -3,7 +3,7 @@ package space.inevitable.eventbus.invoke
 import spock.lang.Specification
 
 class InvokerRunnableTest extends Specification {
-    def setup(){
+    def setup() {
 
     }
 

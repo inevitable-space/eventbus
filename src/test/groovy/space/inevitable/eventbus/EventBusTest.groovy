@@ -23,8 +23,8 @@ class EventBusTest extends Specification {
 
     def "post should invoke methodA of a ListenerA instance when posting EventA instance"() {
         when:
-        eventBus.subscribe( listenerA )
-        eventBus.post( new EventA() )
+        eventBus.subscribe(listenerA)
+        eventBus.post(new EventA())
 
         then:
         listenerA.wasMethodAInvoked()
@@ -32,9 +32,9 @@ class EventBusTest extends Specification {
 
     def "post should use the right invoker marked as TestInvokerName when posting EventA instance"() {
         when:
-        eventBus.addInvoker( testInvoker )
-        eventBus.subscribe( listenerC )
-        eventBus.post( new EventC() )
+        eventBus.addInvoker(testInvoker)
+        eventBus.subscribe(listenerC)
+        eventBus.post(new EventC())
 
         then:
         testInvoker.invoked
@@ -42,20 +42,20 @@ class EventBusTest extends Specification {
 
     def "subscribe a listener when there is no invoker related to the @Subscribe annotation value should throw an IllegalState exception"() {
         when:
-        eventBus.subscribe( listenerC )
+        eventBus.subscribe(listenerC)
 
         then:
         IllegalStateException illegalStateException = thrown()
 
         illegalStateException != null
-        illegalStateException.message.contains( "TestInvokerName" )
+        illegalStateException.message.contains("TestInvokerName")
     }
 
     class TestInvoker implements Invoker {
         private boolean invoked
 
         @Override
-        public void invoke( ExecutionBundle executionBundle, Object eventInstance ) {
+        public void invoke(ExecutionBundle executionBundle, Object eventInstance) {
             invoked = true
         }
 

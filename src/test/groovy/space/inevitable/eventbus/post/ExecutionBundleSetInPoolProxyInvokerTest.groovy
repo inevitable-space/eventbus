@@ -23,18 +23,18 @@ class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
         invokersByName = new InvokersByName()
 
         Invoker sameThreadInvoker = new SameThreadInvoker();
-        invokersByName.put( "SameThreadInvoker", sameThreadInvoker );
+        invokersByName.put("SameThreadInvoker", sameThreadInvoker);
 
         listenerA = new ListenerA()
-        ListenersHostess listenersPoolsHostess = new ListenersHostess( executionBundleSetsByTypeMap, invokersByName )
+        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName)
 
-        listenersPoolsHostess.host( listenerA )
-        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker( executionBundleSetsByTypeMap )
+        listenersPoolsHostess.host(listenerA)
+        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundleSetsByTypeMap)
     }
 
     def "invokeListenersForEvent should call the methodA of the ListenerA instance when an instance of EventA is posted"() {
         when:
-        listenersInPoolProxyInvoker.invokeListenersForEvent( new EventA() )
+        listenersInPoolProxyInvoker.invokeListenersForEvent(new EventA())
 
         then:
         listenerA.wasMethodAInvoked()
@@ -42,8 +42,8 @@ class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
 
     def "invokeListenersForEvent should not call the methodA of the ListenerA instance an instance of String or EventB is posted"() {
         when:
-        listenersInPoolProxyInvoker.invokeListenersForEvent( "EVENT" )
-        listenersInPoolProxyInvoker.invokeListenersForEvent( new EventB() )
+        listenersInPoolProxyInvoker.invokeListenersForEvent("EVENT")
+        listenersInPoolProxyInvoker.invokeListenersForEvent(new EventB())
 
         then:
         !listenerA.wasMethodAInvoked()

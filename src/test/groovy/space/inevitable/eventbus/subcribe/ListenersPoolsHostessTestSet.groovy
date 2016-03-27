@@ -21,17 +21,17 @@ class ListenersPoolsHostessTestSet extends Specification {
         executionBundleSetsByTypeMap = new ConcurrentHashMap<>();
         invokersByName = new InvokersByName()
         Invoker invoker = new SameThreadInvoker();
-        invokersByName.put( invoker.getName(), invoker )
+        invokersByName.put(invoker.getName(), invoker)
     }
 
     def "Host should accommodate one object in the correct listener pool when the listenersPools is empty"() {
         given:
         ListenerA listenerA = new ListenerA()
-        ListenersHostess listenersPoolsHostess = new ListenersHostess( executionBundleSetsByTypeMap, invokersByName )
+        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName)
 
         when:
-        listenersPoolsHostess.host( listenerA )
-        ExecutionBundleSet executionBundleSetForEvent = executionBundleSetsByTypeMap.get( ( Type ) EventA.class )
+        listenersPoolsHostess.host(listenerA)
+        ExecutionBundleSet executionBundleSetForEvent = executionBundleSetsByTypeMap.get((Type) EventA.class)
 
         then:
         executionBundleSetForEvent != null
@@ -45,16 +45,16 @@ class ListenersPoolsHostessTestSet extends Specification {
         def objectC = new ListenerA()
         def objectD = new ListenerB()
 
-        ListenersHostess listenersPoolsHostess = new ListenersHostess( executionBundleSetsByTypeMap, invokersByName )
+        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName)
 
         when:
-        listenersPoolsHostess.host( objectA )
-        listenersPoolsHostess.host( objectB )
-        listenersPoolsHostess.host( objectC )
-        listenersPoolsHostess.host( objectD )
+        listenersPoolsHostess.host(objectA)
+        listenersPoolsHostess.host(objectB)
+        listenersPoolsHostess.host(objectC)
+        listenersPoolsHostess.host(objectD)
 
-        def executionBundleSetForEventA = executionBundleSetsByTypeMap.get( ( Type ) EventA.class )
-        def executionBundleSetForEventB = executionBundleSetsByTypeMap.get( EventB.class )
+        def executionBundleSetForEventA = executionBundleSetsByTypeMap.get((Type) EventA.class)
+        def executionBundleSetForEventB = executionBundleSetsByTypeMap.get(EventB.class)
 
         then:
         executionBundleSetForEventA != null
@@ -69,16 +69,16 @@ class ListenersPoolsHostessTestSet extends Specification {
         def objectA = new ListenerA()
         def objectB = new ListenerB()
 
-        ListenersHostess listenersPoolsHostess = new ListenersHostess( executionBundleSetsByTypeMap, invokersByName )
+        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName)
 
         when:
-        listenersPoolsHostess.host( objectA )
-        listenersPoolsHostess.host( objectB )
-        listenersPoolsHostess.host( objectA )
-        listenersPoolsHostess.host( objectB )
+        listenersPoolsHostess.host(objectA)
+        listenersPoolsHostess.host(objectB)
+        listenersPoolsHostess.host(objectA)
+        listenersPoolsHostess.host(objectB)
 
-        def executionBundleSetForEventA = executionBundleSetsByTypeMap.get( ( Type ) EventA.class )
-        def executionBundleSetForEventB = executionBundleSetsByTypeMap.get( EventB.class )
+        def executionBundleSetForEventA = executionBundleSetsByTypeMap.get((Type) EventA.class)
+        def executionBundleSetForEventB = executionBundleSetsByTypeMap.get(EventB.class)
 
         then:
         executionBundleSetForEventA != null

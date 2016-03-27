@@ -4,6 +4,7 @@ version '0.0.1'
 apply plugin: 'groovy'
 apply plugin: 'java'
 
+//TODO : configure to upload to maven central
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7

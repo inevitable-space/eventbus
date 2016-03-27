@@ -29,4 +29,7 @@ class EventBusExample extends Specification {
             //Add your code to process the event
         }
     }
+
+    //TODO : add example of subscriber with no methods annotated in other file
+    //TODO : add example of subscriber wich needs to be called in a separated thread
 }

@@ -1,15 +1,15 @@
 package space.inevitable.eventbus.invoke;
 
-import space.inevitable.eventbus.EventBusI;
+import space.inevitable.eventbus.EventBus;
 import space.inevitable.eventbus.beans.ExecutionBundle;
 
 import java.lang.reflect.Method;
 
 
 public final class SameThreadInvoker implements Invoker {
-    private final EventBusI eventBus;
+    private final EventBus eventBus;
 
-    public SameThreadInvoker(final EventBusI eventBus) {
+    public SameThreadInvoker(final EventBus eventBus) {
         this.eventBus = eventBus;
     }
 

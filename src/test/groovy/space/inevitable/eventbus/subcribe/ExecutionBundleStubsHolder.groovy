@@ -1,6 +1,6 @@
 package space.inevitable.eventbus.subcribe
 
-import space.inevitable.eventbus.EventBusI
+import space.inevitable.eventbus.EventBus
 import space.inevitable.eventbus.beans.ExecutionBundle
 import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.eventbus.invoke.SameThreadInvoker
@@ -20,7 +20,7 @@ public class ExecutionBundleStubsHolder {
     }
 
     private static init() {
-        EventBusI eventBus = mock(EventBusI)
+        EventBus eventBus = mock(EventBus)
 
         ListenerA listenerA = new ListenerA()
         Method methodA = listenerA.getClass().getMethod("methodA", EventA.class)

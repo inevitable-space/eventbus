@@ -1,7 +1,7 @@
 package space.inevitable.eventbus.invoke
 
 import org.mockito.ArgumentCaptor
-import space.inevitable.eventbus.EventBusI
+import space.inevitable.eventbus.EventBus
 import space.inevitable.eventbus.beans.ExecutionBundle
 import space.inevitable.eventbus.post.ExecutionBundleBuilderForTest
 import spock.lang.Specification
@@ -17,7 +17,7 @@ class InvokerRunnableTest extends Specification {
     EventA eventA
     ListenerA listener
     Method method
-    EventBusI eventBus
+    EventBus eventBus
 
     def setup() {
         eventA = new EventA();
@@ -26,7 +26,7 @@ class InvokerRunnableTest extends Specification {
         listener = (ListenerA) executionBundle.listener
         method = executionBundle.method
 
-        eventBus = mock(EventBusI)
+        eventBus = mock(EventBus)
     }
 
     def "Run should execute the method"() {

@@ -7,7 +7,7 @@ class EventBusExample extends Specification {
     def "How to set up and use"() {
         given: //The minimum set up to use the event bus
 
-        Builder<StandardEventBus> standardEventBusBuilder = new StandardEventBusBuilder(); //notice that StandardEventBus needs to be created by the its builder
+        Builder<EventBus> standardEventBusBuilder = new StandardEventBusBuilder(); //notice that StandardEventBus needs to be created by the its builder
         EventBus eventBus = standardEventBusBuilder.build(); //notice that EventBus is an Interface that
 
         when: //A instance of SubscriberClass (could be any of your classes) wants to subscribe in to the bus
@@ -31,5 +31,5 @@ class EventBusExample extends Specification {
     }
 
     //TODO : add example of subscriber with no methods annotated in other file
-    //TODO : add example of subscriber wich needs to be called in a separated thread
+    //TODO : add example of subscriber which needs to be called in a separated thread
 }

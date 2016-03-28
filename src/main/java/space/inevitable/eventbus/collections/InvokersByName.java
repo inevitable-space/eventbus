@@ -27,11 +27,15 @@ public final class InvokersByName {
             return;
         }
 
-        String message = "Invoker under the name: [" + invokerName + "] is not registered.";
-        message += "\n FIX: use the method addInvoker of the event bus.";
-        message += "\nSee the JavaDoc of the invoker interface.";
-        message += "\n FIX: use the method addInvoker of the event bus.";
-        message += "\nSee the JavaDoc of the invoker interface.";
+        String message = "Invoker under the name: [";
+
+        message = message
+                .concat(invokerName)
+                .concat("] is not registered.")
+                .concat("\n FIX: use the method addInvoker of the event bus.")
+                .concat("\nSee the JavaDoc of the invoker interface.")
+                .concat("\n FIX: use the method addInvoker of the event bus.")
+                .concat("\nSee the JavaDoc of the invoker interface.");
 
         throw new IllegalStateException(message);
     }

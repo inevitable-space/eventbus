@@ -17,7 +17,7 @@ public final class StandardEventBus implements EventBus {
     private final ListenersInPoolProxyInvoker listenersInPoolProxyInvoker;
 
     StandardEventBus() {
-        final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap = new ConcurrentHashMap<>();
+        final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap = new ConcurrentHashMap<>(); //TODO : hide inside a class
 
         invokersByName = new InvokersByName();
         listenersHostess = new ListenersHostess(executionBundleSetsByTypeMap, invokersByName);

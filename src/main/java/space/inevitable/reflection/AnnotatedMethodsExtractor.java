@@ -25,11 +25,10 @@ public final class AnnotatedMethodsExtractor {
         final List<Method> annotatedMethods = new LinkedList<>();
 
         for (final Method method : methods) {
-            final boolean annotationNotPresent = !method.isAnnotationPresent(annotationClass);
-            if (annotationNotPresent) {
-                continue;
+            final boolean annotationPresent = method.isAnnotationPresent(annotationClass);
+            if (annotationPresent) {
+                annotatedMethods.add(method);
             }
-            annotatedMethods.add(method);
         }
 
         return annotatedMethods;

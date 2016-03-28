@@ -8,6 +8,8 @@ import java.lang.reflect.Modifier;
 
 
 public final class ListenerMethodValidator {
+    static private final int ALLOWED_ARGUMENT_LIMIT = 1;
+
     private final Method method;
     private final ExceptionWithSuggestionsBuilder exceptionWithSuggestionsBuilder;
 
@@ -71,8 +73,8 @@ public final class ListenerMethodValidator {
 
     private void verifyParametersNumber() {
         final Class<?>[] parameterTypes = method.getParameterTypes();
-        final int allowedArgumentLimit = 1;
-        if (parameterTypes.length != allowedArgumentLimit) {
+
+        if (parameterTypes.length != ALLOWED_ARGUMENT_LIMIT) {
             exceptionWithSuggestionsBuilder.addSuggestion("Declare one argument only.");
         }
     }

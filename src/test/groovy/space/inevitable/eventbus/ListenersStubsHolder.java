@@ -1,6 +1,9 @@
 package space.inevitable.eventbus;
 
 public class ListenersStubsHolder {
+    private ListenersStubsHolder() {
+    }
+
     public static class EventA {
     }
 

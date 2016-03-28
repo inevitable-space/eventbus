@@ -20,7 +20,6 @@ public final class ListenersHostess {
     private final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap;
     private final InvokersByName invokersByName;
 
-
     public ListenersHostess(final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap, final InvokersByName invokersByName) {
         this.executionBundleSetsByTypeMap = executionBundleSetsByTypeMap;
         this.invokersByName = invokersByName;

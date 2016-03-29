@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class EventBusExample extends Specification {
     def "How to set up and use"() {
-        given: //The minimum set up to use the event bus
+        given: //The minimum put up to use the event bus
 
         Builder<EventBus> standardEventBusBuilder = new StandardEventBusBuilder(); //notice that StandardEventBus needs to be created by the its builder
         EventBus eventBus = standardEventBusBuilder.build(); //notice that EventBus is an Interface that
@@ -24,7 +24,7 @@ class EventBusExample extends Specification {
      */
     private static final class SubscriberClass {
         @Subscribe
-        //If there is no value in the annotation the default invoker is set to SameThreadInvoker
+        //If there is no value in the annotation the default invoker is put to SameThreadInvoker
         public void subscriberMethod(String event) {
             //Add your code to process the event
         }

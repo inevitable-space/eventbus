@@ -6,6 +6,7 @@ import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.beans.ExecutionBundleBuilder;
 import space.inevitable.eventbus.beans.MethodData;
 import space.inevitable.eventbus.collections.ExecutionBundleSet;
+import space.inevitable.eventbus.collections.ExecutionBundleSetsByType;
 import space.inevitable.eventbus.collections.InvokersByName;
 import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.reflection.AnnotatedMethodsExtractor;
@@ -13,15 +14,14 @@ import space.inevitable.reflection.AnnotatedMethodsExtractor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Map;
 
 
 public final class ListenersHostess {
-    private final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap;
+    private final ExecutionBundleSetsByType executionBundleSetsByType;
     private final InvokersByName invokersByName;
 
-    public ListenersHostess(final Map<Type, ExecutionBundleSet> executionBundleSetsByTypeMap, final InvokersByName invokersByName) {
-        this.executionBundleSetsByTypeMap = executionBundleSetsByTypeMap;
+    public ListenersHostess(final ExecutionBundleSetsByType executionBundleSetsByType, final InvokersByName invokersByName) {
+        this.executionBundleSetsByType = executionBundleSetsByType;
         this.invokersByName = invokersByName;
     }
 
@@ -53,14 +53,14 @@ public final class ListenersHostess {
     }
 
     private ExecutionBundleSet getExecutionBundleSetForType(final Type type) {
-        final boolean containsPoolForType = executionBundleSetsByTypeMap.containsKey(type);
+        final boolean containsPoolForType = executionBundleSetsByType.containsKey(type);
         ExecutionBundleSet executionBundleSet;
 
         if (containsPoolForType) {
-            executionBundleSet = executionBundleSetsByTypeMap.get(type);
+            executionBundleSet = executionBundleSetsByType.get(type);
         } else {
             executionBundleSet = new ExecutionBundleSet();
-            executionBundleSetsByTypeMap.put(type, executionBundleSet);
+            executionBundleSetsByType.put(type, executionBundleSet);
         }
 
         return executionBundleSet;

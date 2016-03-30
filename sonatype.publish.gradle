@@ -1,0 +1,70 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+archivesBaseName = "eventbus"
+
+//noinspection GroovyAssignabilityCheck
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+
+                name 'eventbus'
+                packaging 'jar'
+                description 'Event bus designed with the idea of open for extension close for modification principle'
+
+                url 'https://github.com/inevitable-space/eventbus'
+
+                scm {
+                    connection 'https://github.com/inevitable-space/eventbus.git'
+                    developerConnection 'https://github.com/inevitable-space/eventbus.git'
+                    url 'https://github.com/inevitable-space/eventbus.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'david.inevitable'
+                        name 'David Garcia'
+                        email 'david@inevitable.space'
+                    }
+                }
+            }
+        }
+    }
+}

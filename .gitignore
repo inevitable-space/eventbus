@@ -1,4 +1,7 @@
-# build files #
+# Local configurations files #
+/gradle.properties
+
+# Build files #
 build/
 .idea/
 .gradle/

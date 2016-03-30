@@ -1,10 +1,9 @@
 group 'space.inevitable'
-version '0.0.1'
+version '0.0.1-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
-
-//TODO : configure to upload to maven central
+apply from: 'sonatype.publish.gradle'
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
@@ -37,7 +36,4 @@ dependencies {
     examplesCompile group: 'junit', name: 'junit', version: '4.11'
     examplesCompile 'org.codehaus.groovy:groovy-all:2.3.11'
     examplesCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-
-    exampleRuntime 'com.athaydes:spock-reports:1.2.7'
-
 }

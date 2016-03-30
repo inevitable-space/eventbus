@@ -9,13 +9,15 @@ public interface EventBus {
     void post(Object eventInstance);
 
     /**
-     * @param listener to be subscribed to the event bus
+     * @param listener to be registered to the event bus
      */
-    void subscribe(Object listener);
+    void register(Object listener);
 
     /**
      * @param invoker to by attached to the event bus
      */
     void addInvoker(Invoker invoker);
+
+    void unregister(Object listener);
 }
 

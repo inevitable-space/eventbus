@@ -35,7 +35,7 @@ public final class ListenerMethodValidator {
         final Class<?> declaringClass = method.getDeclaringClass();
         final String declaringClassName = declaringClass.getName();
 
-        final String message = String.format("Method %s of class %s is not eligible to subscribe on the bus.", methodName, declaringClassName);
+        final String message = String.format("Method %s of class %s is not eligible to register on the bus.", methodName, declaringClassName);
 
         exceptionWithSuggestionsBuilder.setMessage(message);
         throw exceptionWithSuggestionsBuilder.build();

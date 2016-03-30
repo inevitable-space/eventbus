@@ -27,7 +27,7 @@ class StandardEventBusTest extends Specification {
 
     def "post should invoke methodA of a ListenerA instance when posting EventA instance"() {
         when:
-        eventBus.subscribe(listenerA)
+        eventBus.register(listenerA)
         eventBus.post(new EventA())
 
         then:
@@ -37,22 +37,32 @@ class StandardEventBusTest extends Specification {
     def "post should use the right invoker marked as TestInvokerName when posting EventA instance"() {
         when:
         eventBus.addInvoker(testInvoker)
-        eventBus.subscribe(listenerC)
+        eventBus.register(listenerC)
         eventBus.post(new EventC())
 
         then:
         testInvoker.invoked
     }
 
-    def "subscribe a listener when there is no invoker related to the @Subscribe annotation value should throw an IllegalState exception"() {
+    def "register a listener when there is no invoker related to the @Subscribe annotation value should throw an IllegalState exception"() {
         when:
-        eventBus.subscribe(listenerC)
+        eventBus.register(listenerC)
 
         then:
         IllegalStateException illegalStateException = thrown()
 
         illegalStateException != null
         illegalStateException.message.contains("TestInvokerName")
+    }
+
+    def "unregister should avoid post to invoke methodA of a ListenerA instance when posting EventA instance"() {
+        when:
+        eventBus.register(listenerA)
+        eventBus.unregister(listenerA)
+        eventBus.post(new EventA())
+
+        then:
+        listenerA.wasMethodAInvoked()
     }
 
     class TestInvoker implements Invoker {

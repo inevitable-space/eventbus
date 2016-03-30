@@ -1,4 +1,4 @@
-package space.inevitable.eventbus.subcribe
+package space.inevitable.eventbus.register
 
 import space.inevitable.eventbus.Subscribe
 import space.inevitable.eventbus.beans.MethodData

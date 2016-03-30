@@ -5,7 +5,7 @@ import space.inevitable.eventbus.collections.ExecutionBundleSetsByType
 import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.eventbus.invoke.SameThreadInvoker
-import space.inevitable.eventbus.subcribe.ListenersHostess
+import space.inevitable.eventbus.register.ListenersHostess
 import spock.lang.Specification
 
 import static org.mockito.Mockito.mock

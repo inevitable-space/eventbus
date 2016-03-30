@@ -10,10 +10,10 @@ class EventBusExample extends Specification {
         Builder<EventBus> standardEventBusBuilder = new StandardEventBusBuilder(); //notice that StandardEventBus needs to be created by the its builder
         EventBus eventBus = standardEventBusBuilder.build(); //notice that EventBus is an Interface that
 
-        when: //A instance of SubscriberClass (could be any of your classes) wants to subscribe in to the bus
+        when: //A instance of SubscriberClass (could be any of your classes) wants to register in to the bus
 
         SubscriberClass subscriberClass = new SubscriberClass();
-        eventBus.subscribe(subscriberClass);
+        eventBus.register(subscriberClass);
 
         then: //the subscriberMethod will be invoked when a string is posted in to the bus
         eventBus.post("EVENT INSTANCE");

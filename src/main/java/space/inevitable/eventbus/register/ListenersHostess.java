@@ -25,7 +25,9 @@ public final class ListenersHostess {
         this.invokersByName = invokersByName;
     }
 
-    public void host(final Object listener) {
+    public void register(final Object listener) {
+        //TODO : improve the performance by creating a cache of MethodsData stored by the type of the listener
+
         final List<Method> annotatedMethods = extractAnnotatedMethods(listener);
         final List<MethodData> methodsData = buildMethodsData(annotatedMethods);
 
@@ -53,10 +55,10 @@ public final class ListenersHostess {
     }
 
     private ExecutionBundleSet getExecutionBundleSetForType(final Type type) {
-        final boolean containsPoolForType = executionBundleSetsByType.containsKey(type);
+        final boolean containsSetForType = executionBundleSetsByType.containsKey(type);
         ExecutionBundleSet executionBundleSet;
 
-        if (containsPoolForType) {
+        if (containsSetForType) {
             executionBundleSet = executionBundleSetsByType.get(type);
         } else {
             executionBundleSet = new ExecutionBundleSet();
@@ -74,5 +76,28 @@ public final class ListenersHostess {
     private List<MethodData> buildMethodsData(final List<Method> annotatedMethods) {
         final MethodsDataBuilder methodsDataBuilder = new MethodsDataBuilder(annotatedMethods);
         return methodsDataBuilder.build();
+    }
+
+    //TO EVALUATE : From here we could extract other class
+    public void unregister(final Object listener) {
+        //TODO : once the cache of the MethodsData stored by the type of the listener, improve this logic by making a query on it
+        final List<Method> annotatedMethods = extractAnnotatedMethods(listener);
+        final List<MethodData> methodsData = buildMethodsData(annotatedMethods);
+
+        for (final MethodData methodData : methodsData) {
+            final ExecutionBundle executionBundle = buildExecutionBundle(listener, methodData);
+
+            final Type type = methodData.getEventType();
+            final boolean containsSetForType = executionBundleSetsByType.containsKey(type);
+
+            if (containsSetForType) {
+                removeExecutionBundleFromSet(executionBundle, type);
+            }
+        }
+    }
+
+    private void removeExecutionBundleFromSet(final ExecutionBundle executionBundle, Type type) {
+        final ExecutionBundleSet executionBundleSet = executionBundleSetsByType.get(type);
+        executionBundleSet.remove(executionBundle);
     }
 }

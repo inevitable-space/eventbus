@@ -62,7 +62,7 @@ class StandardEventBusTest extends Specification {
         eventBus.post(new EventA())
 
         then:
-        listenerA.wasMethodAInvoked()
+        !listenerA.wasMethodAInvoked()
     }
 
     class TestInvoker implements Invoker {

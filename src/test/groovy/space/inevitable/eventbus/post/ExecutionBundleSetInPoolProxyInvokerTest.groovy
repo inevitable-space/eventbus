@@ -29,7 +29,7 @@ class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
         listenerA = new ListenerA()
         ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
 
-        listenersPoolsHostess.host(listenerA)
+        listenersPoolsHostess.register(listenerA)
         listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundleSetsByType)
     }
 

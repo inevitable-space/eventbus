@@ -8,8 +8,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
-public final class ExecutionBundleSet implements Iterable<ExecutionBundle> {
-    private final Set<ExecutionBundle> executionBundlePool;
+public final class ExecutionBundleSet implements Iterable<ExecutionBundle> { //TODO : Improve the name of this class
+    private final Set<ExecutionBundle> executionBundlePool; //TODO : Improve the name of this variable after improving the name of the class
 
     public ExecutionBundleSet() {
         executionBundlePool = new LinkedHashSet<>();
@@ -21,6 +21,10 @@ public final class ExecutionBundleSet implements Iterable<ExecutionBundle> {
 
     public synchronized int size() {
         return executionBundlePool.size();
+    }
+
+    public synchronized void remove(final ExecutionBundle executionBundle) {
+        executionBundlePool.remove(executionBundle);
     }
 
     @Override

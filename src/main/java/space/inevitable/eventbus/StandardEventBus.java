@@ -22,7 +22,7 @@ public final class StandardEventBus implements EventBus {
 
     @Override
     public void register(final Object listener) {
-        listenersHostess.host(listener);
+        listenersHostess.register(listener);
     }
 
     @Override
@@ -37,6 +37,6 @@ public final class StandardEventBus implements EventBus {
 
     @Override
     public void unregister(Object listener) {
-
+        listenersHostess.unregister(listener);
     }
 }

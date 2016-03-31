@@ -18,6 +18,9 @@ public interface EventBus {
      */
     void addInvoker(Invoker invoker);
 
+    /**
+     * @param listener to be unregistered to the event bus
+     */
     void unregister(Object listener);
 }
 

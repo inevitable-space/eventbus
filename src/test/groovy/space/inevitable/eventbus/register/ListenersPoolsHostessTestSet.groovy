@@ -32,10 +32,10 @@ class ListenersPoolsHostessTestSet extends Specification {
     def "Host should accommodate one object in the correct listener pool when the listenersPools is empty"() {
         given:
         ListenerA listenerA = new ListenerA()
-        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
+        ListenersHostess listenersHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
 
         when:
-        listenersPoolsHostess.host(listenerA)
+        listenersHostess.register(listenerA)
         ExecutionBundleSet executionBundleSetForEvent = executionBundleSetsByType.get((Type) EventA.class)
 
         then:
@@ -53,10 +53,10 @@ class ListenersPoolsHostessTestSet extends Specification {
         ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
 
         when:
-        listenersPoolsHostess.host(objectA)
-        listenersPoolsHostess.host(objectB)
-        listenersPoolsHostess.host(objectC)
-        listenersPoolsHostess.host(objectD)
+        listenersPoolsHostess.register(objectA)
+        listenersPoolsHostess.register(objectB)
+        listenersPoolsHostess.register(objectC)
+        listenersPoolsHostess.register(objectD)
 
         def executionBundleSetForEventA = executionBundleSetsByType.get((Type) EventA.class)
         def executionBundleSetForEventB = executionBundleSetsByType.get(EventB.class)
@@ -77,10 +77,10 @@ class ListenersPoolsHostessTestSet extends Specification {
         ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
 
         when:
-        listenersPoolsHostess.host(objectA)
-        listenersPoolsHostess.host(objectB)
-        listenersPoolsHostess.host(objectA)
-        listenersPoolsHostess.host(objectB)
+        listenersPoolsHostess.register(objectA)
+        listenersPoolsHostess.register(objectB)
+        listenersPoolsHostess.register(objectA)
+        listenersPoolsHostess.register(objectB)
 
         def executionBundleSetForEventA = executionBundleSetsByType.get((Type) EventA.class)
         def executionBundleSetForEventB = executionBundleSetsByType.get(EventB.class)

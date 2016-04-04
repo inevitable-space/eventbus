@@ -23,12 +23,7 @@ public final class MethodDataBuilder {
         final Subscribe annotation = method.getAnnotation(Subscribe.class);
         final String invokerName = extractInvokerName(annotation);
 
-        return new MethodData(
-                methodName,
-                eventType,
-                method,
-                invokerName
-        );
+        return new MethodData(methodName, eventType, method, invokerName);
     }
 
     private String extractInvokerName(final Subscribe annotation) {
@@ -40,3 +35,5 @@ public final class MethodDataBuilder {
         methodValidator.validate();
     }
 }
+
+

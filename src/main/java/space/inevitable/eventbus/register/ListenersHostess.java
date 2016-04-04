@@ -96,7 +96,7 @@ public final class ListenersHostess {
         }
     }
 
-    private void removeExecutionBundleFromSet(final ExecutionBundle executionBundle, Type type) {
+    private void removeExecutionBundleFromSet(final ExecutionBundle executionBundle, final Type type) {
         final ExecutionBundleSet executionBundleSet = executionBundleSetsByType.get(type);
         executionBundleSet.remove(executionBundle);
     }

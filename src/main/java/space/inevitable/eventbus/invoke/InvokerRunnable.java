@@ -4,7 +4,7 @@ import space.inevitable.eventbus.EventBus;
 
 import java.lang.reflect.Method;
 
-class InvokerRunnable implements Runnable {
+public class InvokerRunnable implements Runnable {
     private final Method method;
     private final Object listener;
     private final Object eventInstance;
@@ -27,3 +27,4 @@ class InvokerRunnable implements Runnable {
         }
     }
 }
+

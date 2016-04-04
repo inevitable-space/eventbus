@@ -36,7 +36,7 @@ public final class StandardEventBus implements EventBus {
     }
 
     @Override
-    public void unregister(Object listener) {
+    public void unregister(final Object listener) {
         listenersHostess.unregister(listener);
     }
 }

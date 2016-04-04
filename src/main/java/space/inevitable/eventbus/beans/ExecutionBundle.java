@@ -37,10 +37,7 @@ public final class ExecutionBundle {
 
     @Override
     public boolean equals(final Object object) {
-        return
-                object == this ||
-                        object instanceof ExecutionBundle &&
-                                object.hashCode() == hashCode()
-                ;
+        return object == this || object instanceof ExecutionBundle && object.hashCode() == hashCode();
     }
 }
+

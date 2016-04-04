@@ -12,15 +12,15 @@ public final class ExecutionBundleSetsByType {
     }
 
 
-    public void put(Type type, ExecutionBundleSet executionBundleSet) {
+    public void put(final Type type, final ExecutionBundleSet executionBundleSet) {
         executionBundleSetsByTypeMap.put(type, executionBundleSet);
     }
 
-    public ExecutionBundleSet get(Type type) {
+    public ExecutionBundleSet get(final Type type) {
         return executionBundleSetsByTypeMap.get(type);
     }
 
-    public boolean containsKey(Type type) {
+    public boolean containsKey(final Type type) {
         return executionBundleSetsByTypeMap.containsKey(type);
     }
 }

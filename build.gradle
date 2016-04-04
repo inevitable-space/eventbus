@@ -1,5 +1,5 @@
 group 'space.inevitable'
-version '0.0.1'
+version '0.0.11'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
@@ -26,15 +26,16 @@ sourceSets {
         compileClasspath += sourceSets.main.output + sourceSets.test.output
     }
 
-    concurrentTest {
+    concurrencyTest {
         java {
-            srcDir 'src/concurrentTest/java'
+            srcDir 'src/concurrencyTest/java'
         }
 
         compileClasspath += sourceSets.main.compileClasspath + sourceSets.test.compileClasspath
         runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
         compileClasspath += sourceSets.main.output + sourceSets.test.output
     }
+
 }
 
 dependencies {

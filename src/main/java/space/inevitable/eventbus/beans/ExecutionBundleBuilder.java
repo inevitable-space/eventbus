@@ -31,7 +31,7 @@ public final class ExecutionBundleBuilder {
             return;
         }
 
-        String message = "Make sure all the fields are put before trying to build an instance of [ExecutionBundle].";
+        final String message = "Make sure all the fields are put before trying to build an instance of [ExecutionBundle].";
         exceptionWithSuggestionsBuilder.setMessage(message);
         throw exceptionWithSuggestionsBuilder.build();
     }

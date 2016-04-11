@@ -8,7 +8,7 @@ class EventBusExample extends Specification {
         given: 'The minimum set up to use the event bus'
 
         Builder<EventBus> standardEventBusBuilder = new StandardEventBusBuilder(); //notice that StandardEventBus needs to be created by the its builder
-        EventBus eventBus = standardEventBusBuilder.build(); //notice that EventBus is an Interface that
+        EventBus eventBus = standardEventBusBuilder.build(); //notice that EventBus is an Interface
 
         when: 'An instance of SubscriberClass (could be any of your classes) wants to register in to the bus'
         SubscriberClass subscriberClass = new SubscriberClass();

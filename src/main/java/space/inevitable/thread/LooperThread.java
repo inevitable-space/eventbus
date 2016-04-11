@@ -1,6 +1,5 @@
 package space.inevitable.thread;
 
-//TODO
 public final class LooperThread extends Thread implements Looper {
     private final Runnable target;
     private volatile boolean keepLooping;

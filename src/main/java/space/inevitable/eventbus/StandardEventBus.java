@@ -1,6 +1,6 @@
 package space.inevitable.eventbus;
 
-import space.inevitable.eventbus.collections.ExecutionBundleSetsByType;
+import space.inevitable.eventbus.collections.ExecutionBundlesByType;
 import space.inevitable.eventbus.collections.InvokersByName;
 import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.eventbus.post.ListenersInPoolProxyInvoker;
@@ -13,11 +13,11 @@ public final class StandardEventBus implements EventBus {
     private final ListenersInPoolProxyInvoker listenersInPoolProxyInvoker;
 
     StandardEventBus() {
-        final ExecutionBundleSetsByType executionBundleSetsByType = new ExecutionBundleSetsByType();
+        final ExecutionBundlesByType executionBundlesByType = new ExecutionBundlesByType();
 
         invokersByName = new InvokersByName();
-        listenersHostess = new ListenersHostess(executionBundleSetsByType, invokersByName);
-        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundleSetsByType);
+        listenersHostess = new ListenersHostess(executionBundlesByType, invokersByName);
+        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundlesByType);
     }
 
     @Override

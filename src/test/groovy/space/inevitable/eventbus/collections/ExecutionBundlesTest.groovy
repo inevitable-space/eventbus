@@ -4,8 +4,8 @@ import space.inevitable.eventbus.beans.ExecutionBundle
 import space.inevitable.eventbus.register.ExecutionBundleStubsHolder
 import spock.lang.Specification
 
-class ExecutionBundleSetTest extends Specification {
-    def listenerPool = new ExecutionBundleSet()
+class ExecutionBundlesTest extends Specification {
+    def listenerPool = new ExecutionBundles()
 
     private ExecutionBundle executionBundleA = ExecutionBundleStubsHolder.executionBundleA;
     private ExecutionBundle executionBundleACopy = ExecutionBundleStubsHolder.executionBundleACopy;

@@ -5,8 +5,8 @@ import space.inevitable.eventbus.ListenersStubsHolder.EventA
 import space.inevitable.eventbus.ListenersStubsHolder.EventB
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerB
-import space.inevitable.eventbus.collections.ExecutionBundleSet
-import space.inevitable.eventbus.collections.ExecutionBundleSetsByType
+import space.inevitable.eventbus.collections.ExecutionBundles
+import space.inevitable.eventbus.collections.ExecutionBundlesByType
 import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.eventbus.invoke.SameThreadInvoker
@@ -17,13 +17,13 @@ import java.lang.reflect.Type
 import static org.mockito.Mockito.mock
 
 class ListenersPoolsHostessTestSet extends Specification {
-    private ExecutionBundleSetsByType executionBundleSetsByType
+    private ExecutionBundlesByType executionBundleSetsByType
     private InvokersByName invokersByName
 
     def setup() {
         EventBus eventBus = mock(EventBus)
 
-        executionBundleSetsByType = new ExecutionBundleSetsByType();
+        executionBundleSetsByType = new ExecutionBundlesByType();
         invokersByName = new InvokersByName()
         Invoker invoker = new SameThreadInvoker(eventBus);
         invokersByName.put(invoker.getName(), invoker)
@@ -36,7 +36,7 @@ class ListenersPoolsHostessTestSet extends Specification {
 
         when:
         listenersHostess.register(listenerA)
-        ExecutionBundleSet executionBundleSetForEvent = executionBundleSetsByType.get((Type) EventA.class)
+        ExecutionBundles executionBundleSetForEvent = executionBundleSetsByType.get((Type) EventA.class)
 
         then:
         executionBundleSetForEvent != null

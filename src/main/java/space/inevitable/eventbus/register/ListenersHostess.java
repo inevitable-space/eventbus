@@ -5,8 +5,8 @@ import space.inevitable.eventbus.Subscribe;
 import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.beans.ExecutionBundleBuilder;
 import space.inevitable.eventbus.beans.MethodData;
-import space.inevitable.eventbus.collections.ExecutionBundleSet;
-import space.inevitable.eventbus.collections.ExecutionBundleSetsByType;
+import space.inevitable.eventbus.collections.ExecutionBundles;
+import space.inevitable.eventbus.collections.ExecutionBundlesByType;
 import space.inevitable.eventbus.collections.InvokersByName;
 import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.reflection.AnnotatedMethodsExtractor;
@@ -17,11 +17,11 @@ import java.util.List;
 
 
 public final class ListenersHostess {
-    private final ExecutionBundleSetsByType executionBundleSetsByType;
+    private final ExecutionBundlesByType executionBundlesByType;
     private final InvokersByName invokersByName;
 
-    public ListenersHostess(final ExecutionBundleSetsByType executionBundleSetsByType, final InvokersByName invokersByName) {
-        this.executionBundleSetsByType = executionBundleSetsByType;
+    public ListenersHostess(final ExecutionBundlesByType executionBundlesByType, final InvokersByName invokersByName) {
+        this.executionBundlesByType = executionBundlesByType;
         this.invokersByName = invokersByName;
     }
 
@@ -35,8 +35,8 @@ public final class ListenersHostess {
             final ExecutionBundle executionBundle = buildExecutionBundle(listener, methodData);
 
             final Type type = methodData.getEventType();
-            final ExecutionBundleSet executionBundleSet = getExecutionBundleSetForType(type);
-            executionBundleSet.add(executionBundle);
+            final ExecutionBundles executionBundles = executionBundlesByType.get(type);
+            executionBundles.add(executionBundle);
         }
     }
 
@@ -52,20 +52,6 @@ public final class ListenersHostess {
         executionBundleBuilder.setMethod(method);
 
         return executionBundleBuilder.build();
-    }
-
-    private ExecutionBundleSet getExecutionBundleSetForType(final Type type) {
-        final boolean containsSetForType = executionBundleSetsByType.containsKey(type);
-        ExecutionBundleSet executionBundleSet;
-
-        if (containsSetForType) {
-            executionBundleSet = executionBundleSetsByType.get(type);
-        } else {
-            executionBundleSet = new ExecutionBundleSet();
-            executionBundleSetsByType.put(type, executionBundleSet);
-        }
-
-        return executionBundleSet;
     }
 
     private List<Method> extractAnnotatedMethods(final Object object) {
@@ -88,7 +74,7 @@ public final class ListenersHostess {
             final ExecutionBundle executionBundle = buildExecutionBundle(listener, methodData);
 
             final Type type = methodData.getEventType();
-            final boolean containsSetForType = executionBundleSetsByType.containsKey(type);
+            final boolean containsSetForType = executionBundlesByType.containsKey(type);
 
             if (containsSetForType) {
                 removeExecutionBundleFromSet(executionBundle, type);
@@ -97,7 +83,7 @@ public final class ListenersHostess {
     }
 
     private void removeExecutionBundleFromSet(final ExecutionBundle executionBundle, final Type type) {
-        final ExecutionBundleSet executionBundleSet = executionBundleSetsByType.get(type);
-        executionBundleSet.remove(executionBundle);
+        final ExecutionBundles executionBundles = executionBundlesByType.get(type);
+        executionBundles.remove(executionBundle);
     }
 }

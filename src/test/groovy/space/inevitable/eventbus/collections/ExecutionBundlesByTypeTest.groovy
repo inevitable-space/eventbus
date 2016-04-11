@@ -4,14 +4,14 @@ import spock.lang.Specification
 
 import java.lang.reflect.Type
 
-class ExecutionBundleSetsByTypeTest extends Specification {
-    ExecutionBundleSetsByType executionBundleSetsByType;
-    ExecutionBundleSet executionBundleSet;
+class ExecutionBundlesByTypeTest extends Specification {
+    ExecutionBundlesByType executionBundleSetsByType;
+    ExecutionBundles executionBundleSet;
     Type type;
 
     def setup() {
-        executionBundleSetsByType = new ExecutionBundleSetsByType()
-        executionBundleSet = GroovyMock(ExecutionBundleSet)
+        executionBundleSetsByType = new ExecutionBundlesByType()
+        executionBundleSet = GroovyMock(ExecutionBundles)
         type = (Type) String
     }
 

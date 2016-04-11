@@ -1,7 +1,7 @@
 package space.inevitable.eventbus.post
 
 import space.inevitable.eventbus.EventBus
-import space.inevitable.eventbus.collections.ExecutionBundleSetsByType
+import space.inevitable.eventbus.collections.ExecutionBundlesByType
 import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.eventbus.invoke.SameThreadInvoker
@@ -11,8 +11,8 @@ import spock.lang.Specification
 import static org.mockito.Mockito.mock
 import static space.inevitable.eventbus.ListenersStubsHolder.*
 
-class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
-    private ExecutionBundleSetsByType executionBundleSetsByType
+class ExecutionBundlesInPoolProxyInvokerTest extends Specification {
+    private ExecutionBundlesByType executionBundleSetsByType
     private InvokersByName invokersByName
     private ListenersInPoolProxyInvoker listenersInPoolProxyInvoker
     private ListenerA listenerA
@@ -20,7 +20,7 @@ class ExecutionBundleSetInPoolProxyInvokerTest extends Specification {
     def setup() {
         EventBus eventBus = mock(EventBus)
 
-        executionBundleSetsByType = new ExecutionBundleSetsByType()
+        executionBundleSetsByType = new ExecutionBundlesByType()
         invokersByName = new InvokersByName()
 
         Invoker sameThreadInvoker = new SameThreadInvoker(eventBus);

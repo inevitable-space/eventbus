@@ -10,6 +10,7 @@ public class SameThreadInvoker extends Invoker {
     private final EventBus eventBus;
 
     public SameThreadInvoker(final EventBus eventBus) {
+        super();
         this.eventBus = eventBus;
     }
 

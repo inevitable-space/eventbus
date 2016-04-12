@@ -15,7 +15,7 @@ public final class ListenersInPoolProxyInvoker {
     private final ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName;
     private final InvokersByPriority invokersByPriority;
 
-    public ListenersInPoolProxyInvoker(final ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName, InvokersByPriority invokersByPriority) {
+    public ListenersInPoolProxyInvoker(final ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName, final InvokersByPriority invokersByPriority) {
         this.executionBundlesByTypeByInvokerName = executionBundlesByTypeByInvokerName;
         this.invokersByPriority = invokersByPriority;
     }

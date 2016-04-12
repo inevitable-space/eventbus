@@ -14,7 +14,7 @@ public class InvokersByPriority {
         invokersByPriority = new ArrayList<>();
     }
 
-    synchronized public void add(Invoker invoker) {
+    synchronized public void add(final Invoker invoker) {
         //TODO : STABILITY : THROW : to avoid duplicates
         invokersByPriority.add(invoker);
         Collections.sort(invokersByPriority);

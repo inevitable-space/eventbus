@@ -22,13 +22,13 @@ public final class LooperThread extends Thread implements Looper {
             target.run();
 
             if (!keepLooping) {
-                return;
+                break;
             }
 
             try {
                 Thread.sleep(getSleepMillisecondsBetweenLoops());
             } catch (InterruptedException e) {
-                return;
+                break;
             }
         }
     }

@@ -44,7 +44,7 @@ public final class ExecutionBundlesByTypeByInvokerName {
         return executionBundlesByTypeByInvokerNameMap.get(type);
     }
 
-    public void putExecutionBundle(Type type, String invokerName, ExecutionBundle executionBundle) {
+    public void putExecutionBundle(final Type type, final String invokerName, final ExecutionBundle executionBundle) {
         final ExecutionBundles executionBundles = get(type, invokerName);
         executionBundles.add(executionBundle);
     }

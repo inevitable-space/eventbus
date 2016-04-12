@@ -11,6 +11,8 @@ public class RunnableQueueExecutorInvoker extends Invoker {
     private final RunnableQueueExecutor runnableQueueExecutor;
 
     public RunnableQueueExecutorInvoker(final EventBus eventBus, final RunnableQueueExecutor runnableQueueExecutor) {
+        super();
+
         this.eventBus = eventBus;
         this.runnableQueueExecutor = runnableQueueExecutor;
     }

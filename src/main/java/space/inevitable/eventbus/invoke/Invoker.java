@@ -11,7 +11,7 @@ public abstract class Invoker implements Comparable<Invoker> {
     public abstract int getExecutionPriority();
 
     @Override
-    public int compareTo(Invoker invoker) {
+    public int compareTo(final Invoker invoker) {
         return this.getExecutionPriority() - invoker.getExecutionPriority();
     }
 }

@@ -6,37 +6,39 @@ import space.inevitable.eventbus.ListenersStubsHolder.EventB
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerA
 import space.inevitable.eventbus.ListenersStubsHolder.ListenerB
 import space.inevitable.eventbus.collections.ExecutionBundles
-import space.inevitable.eventbus.collections.ExecutionBundlesByType
+import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName
 import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.eventbus.invoke.SameThreadInvoker
 import spock.lang.Specification
 
-import java.lang.reflect.Type
-
 import static org.mockito.Mockito.mock
 
 class ListenersPoolsHostessTestSet extends Specification {
-    private ExecutionBundlesByType executionBundleSetsByType
+    private ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName
     private InvokersByName invokersByName
+    private String invokerName
 
     def setup() {
         EventBus eventBus = mock(EventBus)
 
-        executionBundleSetsByType = new ExecutionBundlesByType();
-        invokersByName = new InvokersByName()
         Invoker invoker = new SameThreadInvoker(eventBus);
-        invokersByName.put(invoker.getName(), invoker)
+        invokerName = invoker.getName()
+
+        executionBundlesByTypeByInvokerName = new ExecutionBundlesByTypeByInvokerName();
+        invokersByName = new InvokersByName()
+        invokersByName.put(invokerName, invoker)
+
     }
 
     def "Host should accommodate one object in the correct listener pool when the listenersPools is empty"() {
         given:
         ListenerA listenerA = new ListenerA()
-        ListenersHostess listenersHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
+        ListenersHostess listenersHostess = new ListenersHostess(executionBundlesByTypeByInvokerName, invokersByName)
 
         when:
         listenersHostess.register(listenerA)
-        ExecutionBundles executionBundleSetForEvent = executionBundleSetsByType.get((Type) EventA.class)
+        ExecutionBundles executionBundleSetForEvent = executionBundlesByTypeByInvokerName.get(EventA.class, invokerName)
 
         then:
         executionBundleSetForEvent != null
@@ -50,7 +52,7 @@ class ListenersPoolsHostessTestSet extends Specification {
         def objectC = new ListenerA()
         def objectD = new ListenerB()
 
-        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
+        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundlesByTypeByInvokerName, invokersByName)
 
         when:
         listenersPoolsHostess.register(objectA)
@@ -58,8 +60,8 @@ class ListenersPoolsHostessTestSet extends Specification {
         listenersPoolsHostess.register(objectC)
         listenersPoolsHostess.register(objectD)
 
-        def executionBundleSetForEventA = executionBundleSetsByType.get((Type) EventA.class)
-        def executionBundleSetForEventB = executionBundleSetsByType.get(EventB.class)
+        def executionBundleSetForEventA = executionBundlesByTypeByInvokerName.get(EventA.class, invokerName)
+        def executionBundleSetForEventB = executionBundlesByTypeByInvokerName.get(EventB.class, invokerName)
 
         then:
         executionBundleSetForEventA != null
@@ -74,7 +76,7 @@ class ListenersPoolsHostessTestSet extends Specification {
         def objectA = new ListenerA()
         def objectB = new ListenerB()
 
-        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
+        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundlesByTypeByInvokerName, invokersByName)
 
         when:
         listenersPoolsHostess.register(objectA)
@@ -82,8 +84,8 @@ class ListenersPoolsHostessTestSet extends Specification {
         listenersPoolsHostess.register(objectA)
         listenersPoolsHostess.register(objectB)
 
-        def executionBundleSetForEventA = executionBundleSetsByType.get((Type) EventA.class)
-        def executionBundleSetForEventB = executionBundleSetsByType.get(EventB.class)
+        def executionBundleSetForEventA = executionBundlesByTypeByInvokerName.get(EventA.class, invokerName)
+        def executionBundleSetForEventB = executionBundlesByTypeByInvokerName.get(EventB.class, invokerName)
 
         then:
         executionBundleSetForEventA != null

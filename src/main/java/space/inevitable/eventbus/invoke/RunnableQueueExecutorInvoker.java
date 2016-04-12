@@ -6,7 +6,7 @@ import space.inevitable.thread.RunnableQueueExecutor;
 
 import java.lang.reflect.Method;
 
-public class RunnableQueueExecutorInvoker implements Invoker {
+public class RunnableQueueExecutorInvoker extends Invoker {
     private final EventBus eventBus;
     private final RunnableQueueExecutor runnableQueueExecutor;
 
@@ -27,5 +27,10 @@ public class RunnableQueueExecutorInvoker implements Invoker {
     @Override
     public String getName() {
         return RunnableQueueExecutorInvoker.class.getSimpleName();
+    }
+
+    @Override
+    public int getExecutionPriority() {
+        return 0;
     }
 }

@@ -65,7 +65,7 @@ class StandardEventBusTest extends Specification {
         !listenerA.wasMethodAInvoked()
     }
 
-    class TestInvoker implements Invoker {
+    class TestInvoker extends Invoker {
         private boolean invoked
 
         @Override
@@ -76,6 +76,11 @@ class StandardEventBusTest extends Specification {
         @Override
         public String getName() {
             return "TestInvokerName"
+        }
+
+        @Override
+        int getExecutionPriority() {
+            return 0
         }
     }
 }

@@ -16,6 +16,8 @@ public final class InvokersByName {
     }
 
     public void put(final String invokerName, final Invoker invoker) {
+        //TODO : FUNCTION ARGUMENTS : this should only receive the invoker
+        //TODO : STABILITY : Add exception to avoid overwriting existent invokers
         invokersByNameMap.put(invokerName, invoker);
     }
 

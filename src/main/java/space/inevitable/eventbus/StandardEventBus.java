@@ -1,7 +1,8 @@
 package space.inevitable.eventbus;
 
-import space.inevitable.eventbus.collections.ExecutionBundlesByType;
+import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName;
 import space.inevitable.eventbus.collections.InvokersByName;
+import space.inevitable.eventbus.collections.InvokersByPriority;
 import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.eventbus.post.ListenersInPoolProxyInvoker;
 import space.inevitable.eventbus.register.ListenersHostess;
@@ -11,13 +12,16 @@ public final class StandardEventBus implements EventBus {
     private final InvokersByName invokersByName;
     private final ListenersHostess listenersHostess;
     private final ListenersInPoolProxyInvoker listenersInPoolProxyInvoker;
+    private final InvokersByPriority invokersByPriority;
 
-    StandardEventBus() {
-        final ExecutionBundlesByType executionBundlesByType = new ExecutionBundlesByType();
 
+    public StandardEventBus() {
+        final ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName = new ExecutionBundlesByTypeByInvokerName();
+
+        invokersByPriority = new InvokersByPriority();
         invokersByName = new InvokersByName();
-        listenersHostess = new ListenersHostess(executionBundlesByType, invokersByName);
-        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundlesByType);
+        listenersHostess = new ListenersHostess(executionBundlesByTypeByInvokerName, invokersByName);
+        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundlesByTypeByInvokerName, invokersByPriority);
     }
 
     @Override
@@ -33,6 +37,7 @@ public final class StandardEventBus implements EventBus {
     @Override
     public void addInvoker(final Invoker invoker) {
         invokersByName.put(invoker.getName(), invoker);
+        invokersByPriority.add(invoker);
     }
 
     @Override

@@ -1,8 +1,9 @@
 package space.inevitable.eventbus.post
 
 import space.inevitable.eventbus.EventBus
-import space.inevitable.eventbus.collections.ExecutionBundlesByType
+import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName
 import space.inevitable.eventbus.collections.InvokersByName
+import space.inevitable.eventbus.collections.InvokersByPriority
 import space.inevitable.eventbus.invoke.Invoker
 import space.inevitable.eventbus.invoke.SameThreadInvoker
 import space.inevitable.eventbus.register.ListenersHostess
@@ -12,25 +13,27 @@ import static org.mockito.Mockito.mock
 import static space.inevitable.eventbus.ListenersStubsHolder.*
 
 class ExecutionBundlesInPoolProxyInvokerTest extends Specification {
-    private ExecutionBundlesByType executionBundleSetsByType
-    private InvokersByName invokersByName
     private ListenersInPoolProxyInvoker listenersInPoolProxyInvoker
     private ListenerA listenerA
 
     def setup() {
         EventBus eventBus = mock(EventBus)
 
-        executionBundleSetsByType = new ExecutionBundlesByType()
-        invokersByName = new InvokersByName()
-
         Invoker sameThreadInvoker = new SameThreadInvoker(eventBus);
+
+        def executionBundlesByTypeByInvokerName = new ExecutionBundlesByTypeByInvokerName()
+
+        def invokersByName = new InvokersByName()
         invokersByName.put("SameThreadInvoker", sameThreadInvoker);
 
+        def invokersByPriority = new InvokersByPriority()
+        invokersByPriority.add(sameThreadInvoker)
+
         listenerA = new ListenerA()
-        ListenersHostess listenersPoolsHostess = new ListenersHostess(executionBundleSetsByType, invokersByName)
+        def listenersPoolsHostess = new ListenersHostess(executionBundlesByTypeByInvokerName, invokersByName)
 
         listenersPoolsHostess.register(listenerA)
-        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundleSetsByType)
+        listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundlesByTypeByInvokerName, invokersByPriority)
     }
 
     def "invokeListenersForEvent should call the methodA of the ListenerA instance when an instance of EventA is posted"() {

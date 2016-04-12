@@ -6,7 +6,7 @@ import space.inevitable.eventbus.beans.ExecutionBundle;
 import space.inevitable.eventbus.beans.ExecutionBundleBuilder;
 import space.inevitable.eventbus.beans.MethodData;
 import space.inevitable.eventbus.collections.ExecutionBundles;
-import space.inevitable.eventbus.collections.ExecutionBundlesByType;
+import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName;
 import space.inevitable.eventbus.collections.InvokersByName;
 import space.inevitable.eventbus.invoke.Invoker;
 import space.inevitable.reflection.AnnotatedMethodsExtractor;
@@ -17,11 +17,11 @@ import java.util.List;
 
 
 public final class ListenersHostess {
-    private final ExecutionBundlesByType executionBundlesByType;
+    private final ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName;
     private final InvokersByName invokersByName;
 
-    public ListenersHostess(final ExecutionBundlesByType executionBundlesByType, final InvokersByName invokersByName) {
-        this.executionBundlesByType = executionBundlesByType;
+    public ListenersHostess(final ExecutionBundlesByTypeByInvokerName executionBundlesByTypeByInvokerName, final InvokersByName invokersByName) {
+        this.executionBundlesByTypeByInvokerName = executionBundlesByTypeByInvokerName;
         this.invokersByName = invokersByName;
     }
 
@@ -34,9 +34,10 @@ public final class ListenersHostess {
         for (final MethodData methodData : methodsData) {
             final ExecutionBundle executionBundle = buildExecutionBundle(listener, methodData);
 
+            final String invokerName = methodData.getInvokerName();
             final Type type = methodData.getEventType();
-            final ExecutionBundles executionBundles = executionBundlesByType.get(type);
-            executionBundles.add(executionBundle);
+
+            executionBundlesByTypeByInvokerName.putExecutionBundle(type, invokerName, executionBundle);
         }
     }
 
@@ -73,17 +74,18 @@ public final class ListenersHostess {
         for (final MethodData methodData : methodsData) {
             final ExecutionBundle executionBundle = buildExecutionBundle(listener, methodData);
 
+            final String invokerName = methodData.getInvokerName();
             final Type type = methodData.getEventType();
-            final boolean containsSetForType = executionBundlesByType.containsKey(type);
+            final boolean containsSetForType = executionBundlesByTypeByInvokerName.containsExecutionBundleFor(type, invokerName);
 
             if (containsSetForType) {
-                removeExecutionBundleFromSet(executionBundle, type);
+                removeExecutionBundleFromSet(executionBundle, invokerName, type);
             }
         }
     }
 
-    private void removeExecutionBundleFromSet(final ExecutionBundle executionBundle, final Type type) {
-        final ExecutionBundles executionBundles = executionBundlesByType.get(type);
+    private void removeExecutionBundleFromSet(final ExecutionBundle executionBundle, final String invokerName, final Type type) {
+        final ExecutionBundles executionBundles = executionBundlesByTypeByInvokerName.get(type, invokerName);
         executionBundles.remove(executionBundle);
     }
 }

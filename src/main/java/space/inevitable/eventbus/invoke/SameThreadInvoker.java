@@ -6,13 +6,14 @@ import space.inevitable.eventbus.beans.ExecutionBundle;
 import java.lang.reflect.Method;
 
 
-public final class SameThreadInvoker implements Invoker {
+public class SameThreadInvoker extends Invoker {
     private final EventBus eventBus;
 
     public SameThreadInvoker(final EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
+    @Override
     public void invoke(final ExecutionBundle executionBundle, final Object eventInstance) {
         final Method method = executionBundle.getMethod();
         final Object listener = executionBundle.getListener();
@@ -24,5 +25,10 @@ public final class SameThreadInvoker implements Invoker {
     @Override
     public String getName() {
         return SameThreadInvoker.class.getSimpleName();
+    }
+
+    @Override
+    public int getExecutionPriority() {
+        return 1000;
     }
 }

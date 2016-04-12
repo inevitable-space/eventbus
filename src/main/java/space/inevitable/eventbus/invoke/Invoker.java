@@ -3,8 +3,16 @@ package space.inevitable.eventbus.invoke;
 
 import space.inevitable.eventbus.beans.ExecutionBundle;
 
-public interface Invoker {
-    void invoke(final ExecutionBundle executionBundle, final Object eventInstance);
+public abstract class Invoker implements Comparable<Invoker> {
+    public abstract void invoke(final ExecutionBundle executionBundle, final Object eventInstance);
 
-    String getName();
+    public abstract String getName();
+
+    public abstract int getExecutionPriority();
+
+    @Override
+    public int compareTo(Invoker invoker) {
+        return this.getExecutionPriority() - invoker.getExecutionPriority();
+    }
 }
+

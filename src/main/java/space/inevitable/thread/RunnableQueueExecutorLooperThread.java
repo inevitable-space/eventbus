@@ -44,7 +44,7 @@ public class RunnableQueueExecutorLooperThread extends Thread implements Runnabl
 
     public void add(final Runnable runnable) {
         if (!this.allowAddBeforeStartTheThread && !this.isAlive()) {
-            String message = "Cannot add runnable before invoking start, unless setAllowAddBeforeStartTheThread(true) is called";
+            final String message = "Cannot add runnable before invoking start, unless setAllowAddBeforeStartTheThread(true) is called";
             throw new IllegalStateException(message);
         }
         runnableQueue.add(runnable);

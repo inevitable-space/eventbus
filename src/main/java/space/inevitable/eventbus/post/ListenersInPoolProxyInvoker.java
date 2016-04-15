@@ -1,6 +1,7 @@
 package space.inevitable.eventbus.post;
 
 import space.inevitable.eventbus.beans.ExecutionBundle;
+import space.inevitable.eventbus.beans.PostOrder;
 import space.inevitable.eventbus.collections.ExecutionBundles;
 import space.inevitable.eventbus.collections.ExecutionBundlesByInvokerName;
 import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName;
@@ -20,18 +21,18 @@ public final class ListenersInPoolProxyInvoker {
         this.invokersByPriority = invokersByPriority;
     }
 
-    public void invokeListenersForEvent(final Object eventInstance) {
+    public void invokeListenersForEvent(final Object eventInstance, final PostOrder postOrder) {
         final ExecutionBundlesByInvokerName executionBundlesByInvokerName = getExecutionBundlesByInvokerName(eventInstance);
 
         if (executionBundlesByInvokerName == null) {
             return;
         }
 
-        invokeListenersInExecutionBundlesByInvokerName(executionBundlesByInvokerName, eventInstance);
+        invokeListenersInExecutionBundlesByInvokerName(executionBundlesByInvokerName, eventInstance, postOrder);
     }
 
-    private void invokeListenersInExecutionBundlesByInvokerName(final ExecutionBundlesByInvokerName executionBundlesByInvokerName, final Object eventInstance) {
-        final List<Invoker> invokersByPriorityList = invokersByPriority.getList();
+    private void invokeListenersInExecutionBundlesByInvokerName(final ExecutionBundlesByInvokerName executionBundlesByInvokerName, final Object eventInstance, final PostOrder postOrder) {
+        final List<Invoker> invokersByPriorityList = invokersByPriority.getList(postOrder);
 
         for (final Invoker invoker : invokersByPriorityList) {
             final String invokerName = invoker.getName();

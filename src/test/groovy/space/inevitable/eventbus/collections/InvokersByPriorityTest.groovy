@@ -51,7 +51,7 @@ class InvokersByPriorityTest extends Specification {
         invokersByPriority.add(invokerB)
 
         then:
-        def invokers = invokersByPriority.list
+        def invokers = invokersByPriority.getList()
         invokers[0].getExecutionPriority() == 0
         invokers[1].getExecutionPriority() == 1
         invokers[2].getExecutionPriority() == 2

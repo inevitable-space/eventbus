@@ -1,5 +1,6 @@
 package space.inevitable.eventbus;
 
+import space.inevitable.eventbus.beans.PostOrder;
 import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName;
 import space.inevitable.eventbus.collections.InvokersByName;
 import space.inevitable.eventbus.collections.InvokersByPriority;
@@ -31,7 +32,12 @@ public final class StandardEventBus implements EventBus {
 
     @Override
     public void post(final Object eventInstance) {
-        listenersInPoolProxyInvoker.invokeListenersForEvent(eventInstance);
+        listenersInPoolProxyInvoker.invokeListenersForEvent(eventInstance, PostOrder.LOWER_EXECUTION_PRIORITY_FIRST);
+    }
+
+    @Override
+    public void post(final Object eventInstance, final PostOrder postOrder) {
+        listenersInPoolProxyInvoker.invokeListenersForEvent(eventInstance, postOrder);
     }
 
     @Override

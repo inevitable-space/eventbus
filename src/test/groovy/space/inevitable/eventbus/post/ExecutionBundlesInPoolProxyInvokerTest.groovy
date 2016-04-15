@@ -1,6 +1,7 @@
 package space.inevitable.eventbus.post
 
 import space.inevitable.eventbus.EventBus
+import space.inevitable.eventbus.beans.PostOrder
 import space.inevitable.eventbus.collections.ExecutionBundlesByTypeByInvokerName
 import space.inevitable.eventbus.collections.InvokersByName
 import space.inevitable.eventbus.collections.InvokersByPriority
@@ -38,7 +39,7 @@ class ExecutionBundlesInPoolProxyInvokerTest extends Specification {
 
     def "invokeListenersForEvent should call the methodA of the ListenerA instance when an instance of EventA is posted"() {
         when:
-        listenersInPoolProxyInvoker.invokeListenersForEvent(new EventA())
+        listenersInPoolProxyInvoker.invokeListenersForEvent(new EventA(), PostOrder.LOWER_EXECUTION_PRIORITY_FIRST)
 
         then:
         listenerA.wasMethodAInvoked()
@@ -46,8 +47,8 @@ class ExecutionBundlesInPoolProxyInvokerTest extends Specification {
 
     def "invokeListenersForEvent should not call the methodA of the ListenerA instance an instance of String or EventB is posted"() {
         when:
-        listenersInPoolProxyInvoker.invokeListenersForEvent("EVENT")
-        listenersInPoolProxyInvoker.invokeListenersForEvent(new EventB())
+        listenersInPoolProxyInvoker.invokeListenersForEvent("EVENT", PostOrder.LOWER_EXECUTION_PRIORITY_FIRST)
+        listenersInPoolProxyInvoker.invokeListenersForEvent(new EventB(), PostOrder.LOWER_EXECUTION_PRIORITY_FIRST)
 
         then:
         !listenerA.wasMethodAInvoked()

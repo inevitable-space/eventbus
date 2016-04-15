@@ -34,7 +34,7 @@ public final class InvokersByName {
 
         final Set<String> strings = invokersByNameMap.keySet();
 
-        Joiner joiner = Joiner.on("\n    ").skipNulls();
+        final Joiner joiner = Joiner.on("\n    ").skipNulls();
         final String invokers = joiner.join(strings);
 
         String message = "\nInvoker under the name: [";

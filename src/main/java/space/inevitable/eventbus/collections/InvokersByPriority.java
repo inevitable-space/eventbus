@@ -1,5 +1,6 @@
 package space.inevitable.eventbus.collections;
 
+import space.inevitable.eventbus.beans.PostOrder;
 import space.inevitable.eventbus.invoke.Invoker;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class InvokersByPriority {
+public final class InvokersByPriority {
     final private List<Invoker> invokersByPriority;
 
     public InvokersByPriority() {
@@ -20,7 +21,13 @@ public class InvokersByPriority {
         Collections.sort(invokersByPriority);
     }
 
-    public List<Invoker> getList() {
-        return new LinkedList<>(invokersByPriority);
+    public List<Invoker> getList(final PostOrder postOrder) {
+        final List<Invoker> copy = new LinkedList<>(invokersByPriority);
+
+        if (postOrder == PostOrder.UPPER_EXECUTION_PRIORITY_FIRST) {
+            Collections.reverse(copy);
+        }
+
+        return copy;
     }
 }

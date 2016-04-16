@@ -28,6 +28,6 @@ class ListenerMethodValidatorTest extends Specification {
         listenerMethodValidator.validate();
 
         then:
-        true //exception not thrown
+        true //reason not thrown
     }
 }

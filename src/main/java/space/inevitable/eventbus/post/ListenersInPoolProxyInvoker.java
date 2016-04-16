@@ -37,11 +37,28 @@ public final class ListenersInPoolProxyInvoker {
         for (final Invoker invoker : invokersByPriorityList) {
             final String invokerName = invoker.getName();
             final ExecutionBundles executionBundles = executionBundlesByInvokerName.get(invokerName);
-            invokeListenersInPool(executionBundles, eventInstance);
+            invokeListenersInPool(executionBundles, eventInstance, postOrder);
         }
     }
 
-    private void invokeListenersInPool(final Iterable<ExecutionBundle> executionBundles, final Object eventInstance) {
+    private void invokeListenersInPool(final ExecutionBundles executionBundles, final Object eventInstance, PostOrder postOrder) {
+        if (postOrder == PostOrder.LOWER_EXECUTION_PRIORITY_FIRST) {
+            executeFromLowerTpHiggerPriority(executionBundles, eventInstance);
+        } else {
+            executeFromHigherToLowerPriority(executionBundles, eventInstance);
+        }
+    }
+
+    private void executeFromHigherToLowerPriority(final ExecutionBundles executionBundles, final Object eventInstance) {
+        int index = executionBundles.size();
+        while (index-- > 0) {
+            final ExecutionBundle executionBundle = executionBundles.get(index);
+            final Invoker invoker = executionBundle.getInvoker();
+            invoker.invoke(executionBundle, eventInstance);
+        }
+    }
+
+    private void executeFromLowerTpHiggerPriority(final ExecutionBundles executionBundles, final Object eventInstance) {
         for (final ExecutionBundle executionBundle : executionBundles) {
             final Invoker invoker = executionBundle.getInvoker();
             invoker.invoke(executionBundle, eventInstance);

@@ -1,13 +1,13 @@
 package space.inevitable.eventbus.invoke;
 
 public class UnhandledExceptionEvent {
-    private final Exception exception;
+    private final Throwable reason;
 
-    public UnhandledExceptionEvent(final Exception exception) {
-        this.exception = exception;
+    public UnhandledExceptionEvent(final Throwable reason) {
+        this.reason = reason;
     }
 
-    public Exception getException() {
-        return exception;
+    public Throwable getReason() {
+        return reason;
     }
 }

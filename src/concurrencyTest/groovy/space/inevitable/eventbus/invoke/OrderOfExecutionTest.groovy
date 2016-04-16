@@ -7,7 +7,7 @@ import space.inevitable.thread.RunnableQueueExecutor
 import space.inevitable.thread.RunnableQueueExecutorLooperThread
 import spock.lang.Specification
 
-import static space.inevitable.eventbus.beans.PostOrder.UPPER_EXECUTION_PRIORITY_FIRST
+import static space.inevitable.eventbus.beans.PostOrder.HIGHER_EXECUTION_PRIORITY_FIRST
 
 class OrderOfExecutionTest extends Specification {
     RunnableQueueExecutor runnableQueueExecutor
@@ -61,14 +61,14 @@ class OrderOfExecutionTest extends Specification {
 
     def "Methods on marked with RunnableQueueExecutorInvoker should invoked last"() {
         when:
-        eventBus.post(new EventBetweenThreads(), UPPER_EXECUTION_PRIORITY_FIRST)
+        eventBus.post(new EventBetweenThreads(), HIGHER_EXECUTION_PRIORITY_FIRST)
         Thread.sleep(5)
 
         then:
-        listenerOnOtherThreadA.orderOfInvocation == 3
-        listenerOnOtherThreadB.orderOfInvocation == 4
+        listenerOnOtherThreadA.orderOfInvocation == 4
+        listenerOnOtherThreadB.orderOfInvocation == 3
 
-        listenerOnSameThreadA.orderOfInvocation == 1
-        listenerOnSameThreadB.orderOfInvocation == 2
+        listenerOnSameThreadA.orderOfInvocation == 2
+        listenerOnSameThreadB.orderOfInvocation == 1
     }
 }

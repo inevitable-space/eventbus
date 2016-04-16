@@ -24,7 +24,7 @@ public final class InvokersByPriority {
     public List<Invoker> getList(final PostOrder postOrder) {
         final List<Invoker> copy = new LinkedList<>(invokersByPriority);
 
-        if (postOrder == PostOrder.UPPER_EXECUTION_PRIORITY_FIRST) {
+        if (postOrder == PostOrder.HIGHER_EXECUTION_PRIORITY_FIRST) {
             Collections.reverse(copy);
         }
 

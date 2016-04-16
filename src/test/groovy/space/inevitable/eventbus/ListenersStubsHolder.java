@@ -1,5 +1,9 @@
 package space.inevitable.eventbus;
 
+import space.inevitable.eventbus.exception.InvokerException;
+
+import java.io.IOException;
+
 public class ListenersStubsHolder {
     private ListenersStubsHolder() {
     }
@@ -37,6 +41,14 @@ public class ListenersStubsHolder {
         @SuppressWarnings("EmptyMethod") //Testing purposes
         @Subscribe("TestInvokerName")
         public void methodA(final EventC eventC) {
+        }
+    }
+
+    public static final class ListenerD {
+        @Subscribe
+        public void methodA(final EventA eventA) {
+            final IOException reason = new IOException("Reason");
+            throw new InvokerException(reason);
         }
     }
 }

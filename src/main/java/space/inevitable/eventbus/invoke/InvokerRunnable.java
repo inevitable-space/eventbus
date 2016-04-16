@@ -1,9 +1,15 @@
 package space.inevitable.eventbus.invoke;
 
 import space.inevitable.eventbus.EventBus;
+import space.inevitable.eventbus.exception.InvokerException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Used by all the invokers, responsible for the invocation through reflection of the subscribed methods.
+ * Avoid crash except when a InvokerException is thrown.
+ */
 public class InvokerRunnable implements Runnable {
     private final Method method;
     private final Object listener;
@@ -21,10 +27,26 @@ public class InvokerRunnable implements Runnable {
     public void run() {
         try {
             method.invoke(listener, eventInstance);
-        } catch (Exception unhandledException) {
-            final UnhandledExceptionEvent unhandledExceptionEvent = new UnhandledExceptionEvent(unhandledException);
-            eventBus.post(unhandledExceptionEvent);
+        } catch (final InvocationTargetException invocationTargetException) {
+            handleInvocationTargetException(invocationTargetException);
+        } catch (Exception exception) {
+            handleException(exception);
         }
+    }
+
+    private void handleInvocationTargetException(final InvocationTargetException invocationTargetException) {
+        final Throwable reason = invocationTargetException.getTargetException();
+
+        if (reason instanceof InvokerException) {
+            throw (InvokerException) reason;
+        }
+
+        handleException(reason);
+    }
+
+    private void handleException(Throwable reason) {
+        final UnhandledExceptionEvent unhandledExceptionEvent = new UnhandledExceptionEvent(reason);
+        eventBus.post(unhandledExceptionEvent);
     }
 }
 

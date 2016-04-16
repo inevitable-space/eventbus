@@ -25,6 +25,10 @@ public final class StandardEventBus implements EventBus {
         listenersInPoolProxyInvoker = new ListenersInPoolProxyInvoker(executionBundlesByTypeByInvokerName, invokersByPriority);
     }
 
+    /**
+     * @param listener The priority of a method tagged as @Subscribe is given by the priority of
+     *                 its invoker and the order in which was subscribed at the moment of registrations
+     */
     @Override
     public void register(final Object listener) {
         listenersHostess.register(listener);

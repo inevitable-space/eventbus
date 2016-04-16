@@ -50,7 +50,7 @@ public class RunnableQueueExecutorLooperThread extends Thread implements Runnabl
         runnableQueue.add(runnable);
     }
 
-    public void setAllowAddBeforeStartTheThread(final boolean allowAddBeforeStartTheThread) {
+    public final void setAllowAddBeforeStartTheThread(final boolean allowAddBeforeStartTheThread) {
         this.allowAddBeforeStartTheThread = allowAddBeforeStartTheThread;
     }
 }

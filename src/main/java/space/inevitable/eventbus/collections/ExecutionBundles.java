@@ -32,7 +32,7 @@ public final class ExecutionBundles implements Iterable<ExecutionBundle> {
         executionBundlesList.remove(executionBundle);
     }
 
-    public synchronized ExecutionBundle get(int index) {
+    public synchronized ExecutionBundle get(final int index) {
         return executionBundlesList.get(index);
     }
 

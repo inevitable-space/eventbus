@@ -44,7 +44,7 @@ public class InvokerRunnable implements Runnable {
         handleException(reason);
     }
 
-    private void handleException(Throwable reason) {
+    private void handleException(final Throwable reason) {
         final UnhandledExceptionEvent unhandledExceptionEvent = new UnhandledExceptionEvent(reason);
         eventBus.post(unhandledExceptionEvent);
     }

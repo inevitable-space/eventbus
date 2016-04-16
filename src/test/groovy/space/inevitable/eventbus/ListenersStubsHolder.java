@@ -4,7 +4,7 @@ import space.inevitable.eventbus.exception.InvokerException;
 
 import java.io.IOException;
 
-public class ListenersStubsHolder {
+public final class ListenersStubsHolder {
     private ListenersStubsHolder() {
     }
 
@@ -31,16 +31,16 @@ public class ListenersStubsHolder {
     }
 
     public static final class ListenerB {
-        @SuppressWarnings("EmptyMethod") //Testing purposes
         @Subscribe
         public void methodA(final EventB eventB) {
+            //Empty for testing purposes
         }
     }
 
     public static final class ListenerC {
-        @SuppressWarnings("EmptyMethod") //Testing purposes
         @Subscribe("TestInvokerName")
         public void methodA(final EventC eventC) {
+            //Empty for testing purposes
         }
     }
 

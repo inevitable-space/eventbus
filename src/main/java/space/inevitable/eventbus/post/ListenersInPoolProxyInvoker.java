@@ -41,7 +41,7 @@ public final class ListenersInPoolProxyInvoker {
         }
     }
 
-    private void invokeListenersInPool(final ExecutionBundles executionBundles, final Object eventInstance, PostOrder postOrder) {
+    private void invokeListenersInPool(final ExecutionBundles executionBundles, final Object eventInstance, final PostOrder postOrder) {
         if (postOrder == PostOrder.LOWER_EXECUTION_PRIORITY_FIRST) {
             executeFromLowerTpHiggerPriority(executionBundles, eventInstance);
         } else {
